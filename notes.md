@@ -10,3 +10,5 @@
 2) after you get the error, combine both results
 3) git push
 4) check status again
+
+Website is going to be dedicated to journaling, browsing and saving inspiring quotes of choice, and a section for a short survey regarding the user's mood swings and reasons for them.
