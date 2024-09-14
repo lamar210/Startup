@@ -1,4 +1,5 @@
  # Intro
+ ## Basic info:
 
 - check the status often when using the repository 
 
