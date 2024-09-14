@@ -1,5 +1,4 @@
-some text2
-some text1
+some text2 and some text1
 ahahahaha
 this is nice
 GitHub 101
