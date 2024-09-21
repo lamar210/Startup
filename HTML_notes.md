@@ -1,6 +1,8 @@
 # HTML notes
 ## HTML structure elements
-ex: "<body>
+ex:
+ <!--
+ "<body>
   <p>Body</p>
   <header>
     <p>Header - <span>Span</span></p>
@@ -44,19 +46,24 @@ ex: "<body>
     <div>Footer - <span>Span</span></div>
   </footer>
 </body>"
+-->
 
 -tips:
-1) You add / in <smth></smth> for example, to end the function/command there
+You add / in <!-- <smth></smth> --> for example, to end the function/command there
 
-2) <h1> </h1> to make text in a bolder font and larger
+2) <!-- <h1> </h1> --> to make text in a bolder font and larger
 
-3) Hyperlinks are created using the <a> tag in HTML. For example:
+3) Hyperlinks are created using the <!-- <a> --> tag in HTML. For example:
 
+<!--
 <a href="https://www.byu.edu">BYU</a>
 <a href="https://www.familysearch.org">FamilySearch</a>
+-->
 
 4) Include the src attribute with the image URL and the width attribute to set img size. For example:
+<!--
 <aside>
   <p>Aside</p>
   <img src="https://example.com/image.jpg" width="200">
 </aside>
+-->
