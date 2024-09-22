@@ -64,3 +64,15 @@ You add / in <smth></smth> for example, to end the function/command there
   <p>Aside</p>
   <img src="https://example.com/image.jpg" width="200">
 </aside>
+
+## HTML media
+
+* To insert an image: <img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" />
+* To insert an audio: <audio controls src="testAudio.mp3"></audio>
+* To insert a video: <video controls width="300" crossorigin="anonymous">
+  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+</video>
+
+* **If youtube video -- use inframe/embded url**
+
+* For HTML input: always include labels, id and name (make sure to end field or in at the end)
