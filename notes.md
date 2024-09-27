@@ -14,3 +14,4 @@
 Website is going to be dedicated to journaling, browsing and saving inspiring quotes of choice, and a section for a short survey regarding the user's mood swings and reasons for them.
 
 HTML notes: [View Notes](HTML_notes.md)
+See [Simon code](simon-html) for HTML notes application
