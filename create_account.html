@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 
 <head>
 <title>Pages of Me</title>
@@ -11,20 +12,22 @@
     <h2>
         Start Journaling
     </h2>
-    <p>Please enter a valid email:</p>
-    <input type = "text" name = "email" placeholder = "Email address">
+    <form action="your_server_endpoint_here" method="post">
+        <p>Please enter a valid email:</p>
+        <input type = "text" name = "email" placeholder = "Email address">
 
-    <p>Please enter a password:</p>
-    <input type = "password" name = "password" placeholder = "Password">
+        <p>Please enter a password:</p>
+        <input type = "password" name = "password" placeholder = "Password">
 
-    <p style = "font-size: small;">Password must include:</p>
-    <ul style = "font-size: small;">
-        <li>At least 8 characters</li>
-        <li>At least one lowercase letter</li>
-        <li>At least one uppercase letter</li>
-        <li>At least one unique character (e.g., @, #, $, %, _ )</li>
-    </ul>
-    <button type="submit">Continue</button>
-
+        <p style = "font-size: small;">Password must include:</p>
+        <ul style = "font-size: small;">
+            <li>At least 8 characters</li>
+            <li>At least one lowercase letter</li>
+            <li>At least one uppercase letter</li>
+            <li>At least one unique character (e.g., @, #, $, %, _ )</li>
+        </ul>
+        <button type="submit">Continue</button>
+    </form>    
     </center>
 </body>
+</html>
