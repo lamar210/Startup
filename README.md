@@ -67,4 +67,8 @@ With Pages of Me, you can easily maintain a journal that you can edit in your st
 - [x] Text - Journal and Survey pages include text areas for the user's thoughts and feelings.
 - [x] Images - Image of a journal on main page.
 - [x] DB/Login - Input box and submit button for login and creating an account. The survey choices represent data pulled from the database.
-- [x] WebSocket - The count of "mood points" from survey represent the stats section in the user's profile for reflection. Additionally data collected from other users will be displayed in polls to show shared feelings.
+- [x] WebSocket :
+1. The count of "mood points" from survey represent the stats section in the user's profile for reflection
+2. Data collected from other users will be displayed in polls to show shared feelings 
+3. Previous journal entries will be stored int he user's profile
+4. Reminders sent to the user to write in their journal and/or to complete the daily check-in
