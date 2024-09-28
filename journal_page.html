@@ -2,33 +2,42 @@
 <html>
 
 <head>
-<title>Pages of Me</title>
+    <title>Pages of Me</title>
 </head>
 <body>
-    <h1>
-        <a href="index.html">Pages of Me</a>
-    </h1>
+    <header>
+        <h1>
+            <a href="index.html">Pages of Me</a>
+        </h1>
+    </header>
     
-    <div>
-        <a href = "users_profile.html">username@example.com</a>
-    </div>
-    
-    <div>
-        <a href = "journal_page.html">My Journal</a>
-        <a href = "survey.html">Vibe Checker</a>
-    </div>
-    <h1>My Journal</h1>
-    <div>
-        <textarea rows = "15" cols = "100" placeholder = "Write out your thoughts and feelings here..." ></textarea>
-    </div>
-    <div>
-        <a href = "#">Menu</a>
+    <main>
         <div>
-            <button type = "button" onclick="show_Colors()">Colors</button>
-            <button type = "button" onclick="show_Fonts()">Fonts</button>
-            <button type = "button" onclick="show_Emojis()">Emojis</button>
-            <button type = "button" onclick="show_Stickers()">Stickers</button>
+            <a href="users_profile.html">username@example.com</a>
         </div>
-    </div>
+        
+        <div>
+            <a href="journal_page.html">My Journal</a>
+            <a href="survey.html">Vibe Checker</a>
+        </div>
+        
+        <h1>My Journal</h1>
+        <form action="your_server_endpoint_here" method="post">
+        <div>
+            <textarea rows="15" cols="100" placeholder="Write out your thoughts and feelings here..."></textarea>
+        </div>
+        <div>
+            <a href="#">Menu</a>
+            <div>
+                <button type = "button" onclick="show_Colors()">Colors</button>
+                <button type = "button" onclick="show_Fonts()">Fonts</button>
+                <button type = "button" onclick="show_Emojis()">Emojis</button>
+                <button type = "button" onclick="show_Stickers()">Stickers</button>
+            </div>
+            <button type="submit">Add to my journal</button>
+        </div>
+        </form>
+    </main>
+
 </body>
 </html>
