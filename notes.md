@@ -25,7 +25,7 @@ HTML startup code notes:
 
 - (br) is to break up the lines
 
-- Some styling can be done through HTML
+- Some styling can be done through HTML like font size and color of the text
 
 - Spans are used for sliders
 
@@ -36,3 +36,7 @@ HTML startup code notes:
 - ^ For buttons: Type, aria-label, and title
 
 - Placeholders in textareas are the text shown in the box before user types any input
+
+- (ol) is an ordered list
+
+- (li) is used to list items (whether ordered or not)
