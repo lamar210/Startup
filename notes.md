@@ -15,3 +15,25 @@ Website is going to be dedicated to journaling, browsing and saving inspiring qu
 
 HTML notes: [View Notes](HTML_notes.md)
 See [Simon code](simon-html) for HTML notes application
+
+HTML startup code notes:
+
+- hrefs for clicks with links to different pages
+
+- Buttons are for implmentations on the same page (you can add the one click feature so it shows the user and console there's something to be clicked)
+
+- (br) is to break up the lines
+
+- Some styling can be done through HTML
+
+- Spans are used for sliders
+
+- For each page you need a different file
+
+- When making labels, for checkboxes for example, make sure to include the type, name and value with label commands
+
+- ^ For buttons: Type, aria-label, and title
+
+- Placeholders in textareas are the text shown in the box before user types any input
+
+-
