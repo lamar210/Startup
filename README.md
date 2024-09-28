@@ -59,3 +59,12 @@ With Pages of Me, you can easily maintain a journal that you can edit in your st
 3. Can't access journal unless logged in
 
 * **WebSocket** -- Real-time updates, such as mood entries, reflecting live updates of moods with other users, and notifications
+
+## HTML deliverable
+
+- [x] HTML pages - Six HTML page that represent the ability to login, create an account, main page, journal page, survey page, and user's page.
+- [x] Links - The main page contains linked buttons to all other pages--excluding creating an account which can be accessed through the log in page. 
+- [x] Text - Journal and Survey pages include text areas for the user's thoughts and feelings.
+- [x] Images - Image of a journal on main page.
+- [x] DB/Login - Input box and submit button for login and creating an accounr. The survey choices represent data pulled from the database.
+- [x] WebSocket - The count of "mood points" represents from survey represent the stats section in the user's profile for reflection.
