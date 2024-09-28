@@ -46,3 +46,5 @@ HTML startup code notes:
 - Can link pages through html
 
 - In order for database to save input - (form action="your_server_endpoint_here" method="post") shouled be used
+
+- git add * adds all files needed (wish I knew this before)
