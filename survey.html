@@ -5,18 +5,19 @@
 </head>
 <body>
     <h1>
-        <a href="#">Pages of Me</a>
+        <a href="Main_page.html">Pages of Me</a>
     </h1>
     
     <div>
-        <a href = "#">username@example.com</a>
+        <a href = "users_profile.html">username@example.com</a>
     </div>
     
     <div>
-        <a href = "#">My Journal</a>
-        <a href = "#">Vibe Checker</a>
+        <a href = "index.html">My Journal</a>
+        <a href = "survey.html">Vibe Checker</a>
     </div>
     <h1>Daily Check-In</h1>
+    <form action="your_server_endpoint_here" method="post">
     <div>
         <p>1. How did you wake up feeling today?</p>
         <input type = "range" min = "1" max = "10" value = "5" step = "1">
@@ -77,4 +78,6 @@
         </div>
           
     </div>
+    <button type="submit">Submit</button>
+</form>
 </body>
