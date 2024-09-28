@@ -39,4 +39,10 @@ HTML startup code notes:
 
 - (ol) is an ordered list
 
+- (ul) is an unorderd list
+
 - (li) is used to list items (whether ordered or not)
+
+- Can link pages through html
+
+- In order for database to save input - (form action="your_server_endpoint_here" method="post") shouled be used
