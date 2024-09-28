@@ -2,34 +2,40 @@
 <html>
 
 <head>
-<title>Pages of Me</title>
+    <title>Pages of Me</title>
 </head>
 <body>
-    <h1>
-        <a href="index.html">Pages of Me</a>
-    </h1>
-    <center>
-    <h2>
-        Start Journaling
-    </h2>
-    <form action="your_server_endpoint_here" method="post">
-        <p>Please enter a valid email:</p>
-        <input type = "text" name = "email" placeholder = "Email address" required>
+    <header>
+        <h1>
+            <a href="index.html">Pages of Me</a>
+        </h1>
+    </header>
+    
+    <main>
+        <center>
+            <h2>Start Journaling</h2>
+            <form action="your_server_endpoint_here" method="post">
+                <p>Please enter a valid email:</p>
+                <input type = "text" name = "email" placeholder = "Email address" required>
 
-        <p>Please enter a password:</p>
-        <input type = "password" name = "password" placeholder = "Password" required>
+                <p>Please enter a password:</p>
+                <input type = "password" name = "password" placeholder = "Password" required>
 
-        <p style = "font-size: small;">Password must include:</p>
-        <ul style = "font-size: small;">
-            <li>At least 8 characters</li>
-            <li>At least one lowercase letter</li>
-            <li>At least one uppercase letter</li>
-            <li>At least one unique character (e.g., @, #, $, %, _ )</li>
-        </ul>
-        <button type="submit">Continue</button>
-    </form>  
-    <p>Already have an account? <a href="login.html">Login here</a></p>
-  
-    </center>
+                <p style = "font-size: small;">Password must include:</p>
+                <ul style = "font-size: small;">
+                    <li>At least 8 characters</li>
+                    <li>At least one lowercase letter</li>
+                    <li>At least one uppercase letter</li>
+                    <li>At least one unique character (e.g., @, #, $, %, _ )</li>
+                </ul>
+                <button type="submit">Continue</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </center>
+    </main>
+    
+    <footer>
+        <p>If you need assistance, contact support at <a href="lms210@byu.edu">support@example.com</a>.</p>
+    </footer>
 </body>
 </html>

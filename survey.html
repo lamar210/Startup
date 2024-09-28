@@ -5,90 +5,96 @@
     <title>Pages of Me</title>
 </head>
 <body>
-    <h1>
-        <a href="index.html">Pages of Me</a>
-    </h1>
+    <header>
+        <h1>
+            <a href="index.html">Pages of Me</a>
+        </h1>
+    </header>
     
-    <div>
-        <a href = "users_profile.html">username@example.com</a>
-    </div>
-    
-    <div>
-        <a href = "journal_page.html">My Journal</a>
-        <a href = "survey.html">Vibe Checker</a>
-    </div>
-    <h1>Daily Check-In</h1>
-    
-    <form action="your_server_endpoint_here" method="post">
+    <nav>
         <div>
-            <p>1. How did you wake up feeling today?</p>
-            <input type = "range" min = "1" max = "10" value = "5" step = "1">
-            <span>Really bad, sad, and or numb</span>
-            <span>Neutral</span>
-            <span>It is a good day to have a good day</span>
-            <div>
-                <button type = "button" aria-label = "Note Entry" title = "Note Entry" > + 
-                    
-                </button>
-            </div>
-            
-            <div>
-                <p>2. Did you try something out of your comfort zone today? How did it make you feel?</p>
-                <textarea rows = "7" cols = "70" placeholder = "Make sure to do it more if you enjoyed your experience :), if not express it here..." ></textarea>
-            </div>        
-            
-            <div>
-                <p>3. What was a major trigger for your mood today?</p>
-                <label>
-                    <input type="checkbox" name="trigger" value="school"> School or academic stress</label><br>
-                <label>
-                    <input type="checkbox" name="trigger" value="parents"> Parents or relatives</label><br>
-                <label>
-                    <input type="checkbox" name="trigger" value="friends"> Friends</label><br>
-                <label>
-                    <input type="checkbox" name="trigger" value="other"> Other:</label>
-                <input type="text" id="other_trigger" aria-label="Specify other trigger" placeholder="Please specify..." />
-            </div>
-            
-            <div>
-                <p>4. Did you connect with someone today? How did it affect your mood?</p>
-                <textarea rows = "7" cols = "70" placeholder = "Make sure to keep the good ones in your circle, if not..."></textarea>
-            </div>  
-            
-            <div>
-                <p>5. What coping strategies did you use today to manage your feelings?</p>
-                <label>
-                    <input type="checkbox" name="strategy" value="walk"> A walk with nature</label><br>
-                <label>
-                    <input type="checkbox" name="strategy" value="movie"> Watched a movie or a tv show</label><br>
-                <label>
-                    <input type="checkbox" name="strategy" value="eating"> Eating or snacking</label><br>
-                <label>
-                    <input type="checkbox" name="strategy" value="other"> Other:</label>
-                <input type="text" id="other_strategy" aria-label="Specify other strategy" placeholder="Please specify..." />
-            </div>
-            
-            <div>
-                <p>6. What do you hope to achieve by tracking your moods and feelings?</p>
-                <textarea rows = "7" cols = "70" placeholder = "Express it here..."></textarea>
-            </div>  
-            
-            <div>
-                <p>7. How likely are you to share your feelings with someone close to you?</p>
-                <input type = "range" min = "1" max = "5" value = "3" step = "1">
-                <span>Not likely</span>
-                <span>Maybe (depends on the person)</span>
-                <span>Very likely</span>
-            </div>
+            <a href="users_profile.html">username@example.com</a>
         </div>
         
-        <button type="submit">Submit</button>
-    </form>
+        <div>
+            <a href="journal_page.html">My Journal</a>
+            <a href="survey.html">Vibe Checker</a>
+        </div>
+    </nav>
+    <main>
+        <h1>Daily Check-In</h1>
+        
+        <form action="your_server_endpoint_here" method="post">
+            <div>
+                <p>1. How did you wake up feeling today?</p>
+                <input type = "range" min = "1" max = "10" value = "5" step = "1">
+                <span>Really bad, sad, and or numb</span>
+                <span>Neutral</span>
+                <span>It is a good day to have a good day</span>
+                <div>
+                    <button type = "button" aria-label = "Note Entry" title = "Note Entry" > + 
+                        
+                    </button>
+                </div>
+                
+                <div>
+                    <p>2. Did you try something out of your comfort zone today? How did it make you feel?</p>
+                    <textarea rows = "7" cols = "70" placeholder = "Make sure to do it more if you enjoyed your experience :), if not express it here..." ></textarea>
+                </div>        
+                
+                <div>
+                    <p>3. What was a major trigger for your mood today?</p>
+                    <label>
+                        <input type="checkbox" name="trigger" value="school"> School or academic stress</label><br>
+                    <label>
+                        <input type="checkbox" name="trigger" value="parents"> Parents or relatives</label><br>
+                    <label>
+                        <input type="checkbox" name="trigger" value="friends"> Friends</label><br>
+                    <label>
+                        <input type="checkbox" name="trigger" value="other"> Other:</label>
+                    <input type="text" id="other_trigger" aria-label="Specify other trigger" placeholder="Please specify..." />
+                </div>
+                
+                <div>
+                    <p>4. Did you connect with someone today? How did it affect your mood?</p>
+                    <textarea rows = "7" cols = "70" placeholder = "Make sure to keep the good ones in your circle, if not..."></textarea>
+                </div>  
+                
+                <div>
+                    <p>5. What coping strategies did you use today to manage your feelings?</p>
+                    <label>
+                        <input type="checkbox" name="strategy" value="walk"> A walk with nature</label><br>
+                    <label>
+                        <input type="checkbox" name="strategy" value="movie"> Watched a movie or a tv show</label><br>
+                    <label>
+                        <input type="checkbox" name="strategy" value="eating"> Eating or snacking</label><br>
+                    <label>
+                        <input type="checkbox" name="strategy" value="other"> Other:</label>
+                    <input type="text" id="other_strategy" aria-label="Specify other strategy" placeholder="Please specify..." />
+                </div>
+                
+                <div>
+                    <p>6. What do you hope to achieve by tracking your moods and feelings?</p>
+                    <textarea rows = "7" cols = "70" placeholder = "Express it here..."></textarea>
+                </div>  
+                
+                <div>
+                    <p>7. How likely are you to share your feelings with someone close to you?</p>
+                    <input type = "range" min = "1" max = "5" value = "3" step = "1">
+                    <span>Not likely</span>
+                    <span>Maybe (depends on the person)</span>
+                    <span>Very likely</span>
+                </div>
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
     
-    <div id="message" style="display:none;"> //placeholder
-        <p>Thank you for your submission!</p>
-        <br>
-        <p>Check your profile for results.</p>
-    </div>
+        <div id="message" style="display:none;"> //placeholder
+            <p>Thank you for your submission!</p>
+            <br>
+            <p>Check your profile for results.</p>
+        </div>
+    </main>
 </body>
 </html>
