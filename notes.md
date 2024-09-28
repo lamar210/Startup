@@ -35,5 +35,3 @@ HTML startup code notes:
 - ^ For buttons: Type, aria-label, and title
 
 - Placeholders in textareas are the text shown in the box before user types any input
-
--
