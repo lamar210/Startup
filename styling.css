@@ -25,14 +25,22 @@ h1 a:hover {
 }
 
 .username {
-    text-decoration: none;
+    font-family: "Baby Kruffy";
     float: right;
     margin-top: -70px;
     margin-right: 10px;
     font-size: medium;
+    font-weight: bold;
 }
 
 .username a {
     text-decoration: none;
     color: white;
+}
+
+.account-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    vertical-align: middle;
 }
