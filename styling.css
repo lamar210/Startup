@@ -24,4 +24,15 @@ h1 a:hover {
     color: #fdfdf2;
 }
 
+.username {
+    text-decoration: none;
+    float: right;
+    margin-top: -70px;
+    margin-right: 10px;
+    font-size: medium;
+}
 
+.username a {
+    text-decoration: none;
+    color: white;
+}
