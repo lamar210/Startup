@@ -60,3 +60,8 @@ h1 a:hover {
     border-radius: 25px;
     box-shadow: 1px 1px 7px #F4DBC2;
 }
+
+.button:hover {
+    background-color: #FFFFE0;
+    color: rgb(203, 97, 97);
+}
