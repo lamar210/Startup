@@ -65,3 +65,32 @@ h1 a:hover {
     background-color: #FFFFE0;
     color: rgb(203, 97, 97);
 }
+
+h2 {
+    font-family:"Goudy Old Style";
+    color: rgb(203, 97, 97);
+    font-weight: 900;
+    font-size: x-large;
+    text-shadow: 1px 1px 1px rgba(203, 0, 0, 0.2);
+    padding: 5px;
+}
+
+form {
+    width: 900px;
+    margin: auto;
+}
+
+form p {
+    font-family: "Goud Old Style";
+    font-size: 18px;
+    color: #4a4747;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 60%;
+    background: #F4DBC2;
+    border: solid thin white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px rgba(203, 0, 0, 0.2);
+}
