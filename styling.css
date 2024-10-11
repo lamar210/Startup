@@ -6,18 +6,22 @@
     padding: 0;
 } */
 
-/* header {
-    background-color: #4CAF50;
-    padding: 20px;
-    text-align: center;
-} */
-
 h1 {
     font-family: "Elephant";
     font-size: 2em;
     color: white;
-    background-color: #F4C2C2;
+    background-color: #F4DBC2;
     padding: 40px;
     margin: 0;
 }
+
+h1 a {
+    text-decoration: none;
+    color: white;
+}
+
+h1 a:hover {
+    color: #fdfdf2;
+}
+
 
