@@ -104,3 +104,26 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    top: 7px;
+}
+
+.slider-labels span {
+    font-size: 15px;
+    color: #4a4747;
+}
+
+.left-label {
+    text-align: left;
+}
+
+.middle-label {
+    text-align: center;
+}
+
+.right-label {
+    text-align: right;
+}
