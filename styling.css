@@ -119,6 +119,23 @@ input[type="range"]::-webkit-slider-thumb {
     text-align: center;    
 }
 
+#note-entry-button{
+    font-family:"Goudy Old Style";
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgb(203, 97, 97);
+    color: #FFFFE0;
+    border: none;
+    margin-top: -100px;
+    margin-left: 650px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
 textarea {
     background-color: #FFFFF0;
     border-radius: 17px;
@@ -164,6 +181,60 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
+    background-color: #FFFFE0;
+    color: rgb(203, 97, 97);
+    border: 1px solid rgb(203, 97, 97);
+}
+
+.menu-button {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(203, 97, 97);
+    padding: 7px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.dropdown-menu {
+    display: flex;
+    position: absolute;
+    margin-top: 15px;
+    background: #FFFFE0;
+    color: rgb(203, 97, 97);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.dropdown-menu button {
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.dropdown-menu button:hover {
+    color: rgb(203, 97, 97);
+    font-weight: bold;
+}
+
+#journal-submit {
+    font-family:"Goudy Old Style";
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgb(203, 97, 97);
+    color: #FFFFE0;
+    border: none;
+    margin-top: 30px;
+    margin-left: 750px;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+}
+
+#journal-submit:hover {
     background-color: #FFFFE0;
     color: rgb(203, 97, 97);
     border: 1px solid rgb(203, 97, 97);

@@ -25,20 +25,20 @@
         </div>
     </nav>
     <main>    
-        <h1>My Journal</h1>
+        <h2>My Journal</h2>
         <form action="your_server_endpoint_here" method="post">
         <div>
-            <textarea rows="15" cols="100" placeholder="Write out your thoughts and feelings here..."></textarea>
+            <textarea id="journal_text" rows="15" cols="100" placeholder="Write out your thoughts and feelings here..."></textarea>
         </div>
         <div>
-            <a href="#">Menu</a>
-            <div>
+            <a href="#" class="menu-button" onclick="toggleDropdown()">Menu</a>
+            <div class="dropdown-menu">
                 <button type = "button" onclick="show_Colors()">Colors</button>
                 <button type = "button" onclick="show_Fonts()">Fonts</button>
                 <button type = "button" onclick="show_Emojis()">Emojis</button>
                 <button type = "button" onclick="show_Stickers()">Stickers</button>
-            </div>
-            <button type="submit">Add to my journal</button>
+            </div>    
+            <button type="submit" id="journal-submit">Add to my journal</button>
         </div>
         </form>
     </main>
