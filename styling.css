@@ -82,7 +82,9 @@ form {
 form p {
     font-family: "Goud Old Style";
     font-size: 18px;
+    font-weight: bold;
     color: #4a4747;
+    margin-top: 30px;
 }
 
 input[type="range"] {
@@ -115,4 +117,54 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 15px;
     color: #4a4747;
     text-align: center;    
+}
+
+textarea {
+    background-color: #FFFFF0;
+    border-radius: 17px;
+    width: 100%;
+    height: 230px;
+    padding: 10px;
+    font-size: 14px;
+    color: #4a4747;
+    resize: both;
+    line-height: 1.5;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    color: #4a4747;
+    accent-color: rgb(203, 97, 97);
+}
+
+.checkbox-group input[type="text"] {
+    margin-top: 5px;
+    padding: 10px;
+    width: 50%;
+    font-size: 14px;
+    color: #4a4747;
+}
+
+button[type="submit"] {
+    font-family:"Goudy Old Style";
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgb(203, 97, 97);
+    color: #FFFFE0;
+    border: none;
+    margin-top: 30px;
+    margin-left: 750px;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+}
+
+button[type="submit"]:hover {
+    background-color: #FFFFE0;
+    color: rgb(203, 97, 97);
+    border: 1px solid rgb(203, 97, 97);
 }
