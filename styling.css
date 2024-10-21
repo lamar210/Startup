@@ -77,7 +77,6 @@ h2 {
 
 form {
     width: 900px;
-    margin: auto;
 }
 
 form p {
@@ -99,7 +98,7 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 20px;
     width: 20px;
-    background-color: rgb(203, 97, 97);
+    background: rgb(203, 97, 97);
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
@@ -108,22 +107,12 @@ input[type="range"]::-webkit-slider-thumb {
 .slider-labels {
     display: flex;
     justify-content: space-between;
-    top: 7px;
+    margin-top: 2px;
+    width: 65%
 }
 
 .slider-labels span {
     font-size: 15px;
     color: #4a4747;
-}
-
-.left-label {
-    text-align: left;
-}
-
-.middle-label {
-    text-align: center;
-}
-
-.right-label {
-    text-align: right;
+    text-align: center;    
 }
