@@ -1,0 +1,75 @@
+chmod:
+
+Purpose: Changes the permissions of a file or directory.
+Example: chmod 755 filename grants the owner full permissions and read/execute permissions to others.
+pwd:
+
+Purpose: Prints the current working directory.
+Example: Typing pwd will display the full path of the directory you are currently in.
+cd:
+
+Purpose: Changes the current directory to another directory.
+Example: cd /path/to/directory navigates to the specified directory.
+ls:
+
+Purpose: Lists the files and directories in the current directory.
+Example: ls -l provides a detailed list with permissions, ownership, and file sizes.
+vim:
+
+Purpose: Opens the Vim text editor for editing files.
+Example: vim filename opens the specified file in Vim.
+nano:
+
+Purpose: Opens the Nano text editor for editing files, which is more user-friendly than Vim.
+Example: nano filename opens the specified file in Nano.
+mkdir:
+
+Purpose: Creates a new directory.
+Example: mkdir new_directory creates a directory named new_directory.
+mv:
+
+Purpose: Moves or renames files or directories.
+Example: mv oldname.txt newname.txt renames a file, while mv file.txt /new/directory/ moves it to the specified directory.
+rm:
+
+Purpose: Removes (deletes) files or directories.
+Example: rm filename deletes the specified file, while rm -r directory_name removes a directory and its contents recursively.
+man:
+
+Purpose: Displays the manual pages for a command, providing detailed information about its usage.
+Example: man ls shows the manual for the ls command.
+ssh:
+
+Purpose: Establishes a secure shell connection to a remote server.
+Example: ssh user@hostname connects to the specified user on the given host.
+ps:
+
+Purpose: Displays the currently running processes.
+Example: ps aux shows detailed information about all running processes.
+wget:
+
+Purpose: Downloads files from the web using HTTP, HTTPS, or FTP protocols.
+Example: wget http://example.com/file.txt downloads the specified file.
+sudo:
+
+Purpose: Executes a command with superuser (root) privileges.
+Example: sudo apt-get update runs the package manager update command with elevated privileges
+
+span --> inline stuff, doesn't affect structure, for small things like words and phrases
+div --> block-container, affects the structure of web, for bigger stuff like headers, sections, etc...
+
+A Record: Maps a domain name to an IPv4 address.
+AAAA Record: Maps a domain name to an IPv6 address.
+CNAME Record: Maps a domain name to another domain name (an alias).
+MX Record: Specifies the mail server responsible for receiving email for the domain.
+TXT Record: Holds text information for various purposes, such as verifying domain ownership or email sender policies.
+
+Question: Can a DNS A record point to an IP address or another A record?
+
+Answer: A DNS A record can only point to an IP address, not to another A record.
+
+Port 443, 80, 22 is reserved for which protocol?
+
+Port 80: HTTP (unencrypted web traffic)
+Port 443: HTTPS (encrypted web traffic)
+Port 22: SSH (secure remote access and file transfer)
