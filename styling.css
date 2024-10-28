@@ -240,17 +240,22 @@ button[type="submit"]:hover {
     border: 1px solid rgb(203, 97, 97);
 }
 
-#start-journaling {
+#start-journaling a {
     font-family:"Goudy Old Style";
     color: rgb(203, 97, 97);
     font-weight: 900;
     font-size: x-large;
     text-shadow: 1px 1px 1px rgba(203, 0, 0, 0.2);
     padding: 5px;
+    text-decoration: none;
 }
 
 .conditions ul {
     margin-top: -100px;
     margin-left: 670px;
     margin-bottom: 30px;
+}
+
+#journal_text{
+    margin-top: 70px;
 }
