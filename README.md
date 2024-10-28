@@ -72,3 +72,14 @@ With Pages of Me, you can easily maintain a journal that you can edit in your st
 2. Data collected from other users will be displayed in polls to show shared feelings 
 3. Previous journal entries will be stored int he user's profile
 4. Reminders sent to the user to write in their journal and/or to complete the daily check-in
+
+## CSS deliverable
+For this deliverable, I properly styled the website to achieve a cohesive and user-friendly appearance.
+
+- [x] Header, Footer, and Main Content Body: Properly styled with a fixed header and consistent body content.
+- [x] Navigation Elements: Each group of elements has its own navigation, including buttons for "My Journal" and "Vibe Checker," styled.
+- [x] Text Areas and Buttons: Text areas and buttons each have dedicated styling for better usability and clarity for the user.
+- [x] Responsive to Window Resizing: My website looks great on all window size and all devices.
+- [x] Application Elements: Good contrast and color combinations with rest areas on each page.
+- [x] Application Text Content: Consistent fonts used throughout for readability and functionality.
+- [x] Application Images: styled my image and user icon.

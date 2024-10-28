@@ -259,3 +259,21 @@ button[type="submit"]:hover {
 #journal_text{
     margin-top: 70px;
 }
+
+@keyframes slide-up {
+    from {
+        transform: translateY(100px); 
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0); 
+        opacity: 1;                   
+    }
+}
+
+#main-image{
+    border-radius: 10%;
+    width: 500px;
+    height: 300px;
+    animation: slide-up 1s ease-out;
+}
