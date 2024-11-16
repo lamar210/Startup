@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
 
 const CreateAccount = () => {
   return (
     <div>
-      <Header />
       <main>
         <center>
           <h2>Start Journaling</h2>

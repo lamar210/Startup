@@ -1,26 +1,41 @@
 import React from 'react';
-import Header from '../components/Header';
+import { Link } from 'react-router-dom';
 
-const Journal = () => {
-  return (
-    <div>
-      <Header />
-      <main>
-        <h2>Journal Entries</h2>
-        <div>
-          <p>Entry #1: Feeling happy and accomplished today! 
-          <br />
-          - Date: August 28, 2024</p>
-          <p>Entry #2: A bit stressed but managing. 
-          <br />
-          - Date: August 29, 2024</p>
+
+const JournalEntriesPage = () => {
+    const getDate = () => {
+        const today = new Date();
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        return today.toLocaleDateString('en-US', options);
+    };
+    const journalEntries = [
+        { id: 1, title: 'Entry 1', date: getDate() },
+        { id: 2, title: 'Entry 2', date: getDate() },
+        { id: 3, title: 'Entry 3', date: getDate() }
+    ];
+
+    return (
+        <div className="journal-entries-page">
+            <header>
+                <h1>My Journal Entries</h1>
+            </header>
+
+            <main>
+                <div className="entries-list">
+                    {journalEntries.map((entry) => (
+                        <Link 
+                            key={entry.id}
+                            to={`/journal/${entry.id}`}
+                            className="journal-entry-box"
+                        >
+                            <h3>{entry.title}</h3>
+                            <p className="entry-date">{entry.date}</p>
+                        </Link>
+                    ))}
+                </div>
+            </main>
         </div>
-      </main>
-      <footer>
-        <p>Data retrieved from the database.</p>
-      </footer>
-    </div>
-  );
+    );
 };
 
-export default Journal;
+export default JournalEntriesPage;
