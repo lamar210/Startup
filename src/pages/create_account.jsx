@@ -1,50 +1,45 @@
-import React, { useState } from 'react';
-import '../styling.css';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
-function CreateAccount() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const CreateAccount = () => {
+  return (
+    <div>
+      <Header />
+      <main>
+        <center>
+          <h2>Start Journaling</h2>
+          <form action="your_server_endpoint_here" method="post">
+            <p>Please enter a valid email:</p>
+            <input type="text" name="email" placeholder="Email address" required />
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (username && email && password) {
-            console.log('Account created:', { username, email, password });
-        } else {
-            console.log('Please fill out all fields');
-        }
-    };
-    return (
-        <div className="create-account">
-            <h1>Create Account</h1>
-            <form onSubmit={handleSubmit}>
-                <p>Username:</p>
-                <input>
-                    type="text"
-                    placeholder="Enter your username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                </input>
-                <p>Email:</p>
-                <input>
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                </input>
-                <p>Password:</p>
-                <input>
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                </input>
-                <button type="submit">Sign Up</button>
-            </form>
+            <p>Please enter a password:</p>
+            <input type="password" name="password" placeholder="Password" required />
+
+            <p style={{ fontSize: 'small' }}>Password must include:</p>
+            <button type="submit">Continue</button>
+          </form>
+          <p id="already have an account p">
+            Already have an account? <Link to="/login">Login here</Link>
+          </p>
+        </center>
+        <div className="conditions">
+          <ul style={{ fontSize: 'small' }}>
+            <li>At least 8 characters</li>
+            <li>At least one lowercase letter</li>
+            <li>At least one uppercase letter</li>
+            <li>At least one unique character (e.g., @, #, $, %, _ )</li>
+          </ul>
         </div>
-    );
-}
+      </main>
+      <footer>
+        <p>
+          If you need assistance, contact support at{' '}
+          <a href="mailto:lms210@byu.edu">lms210@byu.edu</a>.
+        </p>
+      </footer>
+    </div>
+  );
+};
+
 export default CreateAccount;

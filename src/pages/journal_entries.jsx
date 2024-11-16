@@ -1,20 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styling.css';
+import Header from '../components/Header';
 
-function JournalEntries() {
+const Journal = () => {
   return (
-    <div className="journal-entries-container">
-      <h1>Your Journal Entries</h1>
-      <div className="journal-entries">
-        {/* Placeholder for entries */}
-        <p>No entries yet! Start journaling to record your thoughts.</p>
-        <Link id="start-journaling" className="start-journaling-button" to="/journal-page">
-          Start Journaling
-        </Link>
-      </div>
+    <div>
+      <Header />
+      <main>
+        <h2>Journal Entries</h2>
+        <div>
+          <p>Entry #1: Feeling happy and accomplished today! 
+          <br />
+          - Date: August 28, 2024</p>
+          <p>Entry #2: A bit stressed but managing. 
+          <br />
+          - Date: August 29, 2024</p>
+        </div>
+      </main>
+      <footer>
+        <p>Data retrieved from the database.</p>
+      </footer>
     </div>
   );
-}
+};
 
-export default JournalEntries;
+export default Journal;
