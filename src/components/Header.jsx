@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
     return (
         <header>
             <h1>
-                <a href="/">Pages of Me</a>
+                <Link to="/main_page">Pages of Me</Link>
             </h1>
             <div className="username">
-                <a href="/profile">UserName</a>
+                <Link to="/user_profile">UserName</Link>
                 <img className="account-icon" src="/path-to-icon.png" alt="Account Icon" />
             </div>
         </header>
