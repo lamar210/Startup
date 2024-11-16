@@ -10,7 +10,7 @@ const SurveySlider = () => {
     return (
         <div>
             <label htmlFor="survey-slider">Rate your experience: </label>
-            <input 
+            <input> 
                 type="range" 
                 id="survey-slider" 
                 min="0" 
@@ -18,7 +18,7 @@ const SurveySlider = () => {
                 value={sliderValue} 
                 onChange={handleSliderChange} 
                 style={{ width: '100%' }}
-            />
+            </input>
             <div>
                 <span>{sliderValue}</span>
             </div>
