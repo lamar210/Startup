@@ -1,19 +1,19 @@
 import React from 'react';
-import './Login.css';
+import '../style.css';
 
-const Login = () => {
+function LoginPage() {
   return (
-    <div className="login">
-      <h2>Login</h2>
+    <div>
+      <h1>Login</h1>
       <form>
-        <label>Email:</label>
-        <input type="email" placeholder="Enter your email" />
-        <label>Password:</label>
-        <input type="password" placeholder="Enter your password" />
+        <p>Email:</p>
+        <input type="email" placeholder="Enter your email" required />
+        <p>Password:</p>
+        <input type="password" placeholder="Enter your password" required />
         <button type="submit">Login</button>
       </form>
     </div>
   );
-};
+}
 
-export default Login;
+export default LoginPage;

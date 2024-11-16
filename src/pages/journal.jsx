@@ -1,16 +1,14 @@
 import React from 'react';
-import './Journal.css';
+import '../style.css';
 
-const Journal = () => {
+function JournalPage() {
   return (
-    <div className="journal">
-      <h2>My Journal</h2>
-      <textarea
-        id="journal_text"
-        placeholder="Write your thoughts here..."
-      ></textarea>
+    <div>
+      <h1>New Journal Entry</h1>
+      <textarea id="journal_text" placeholder="Write your thoughts..."></textarea>
+      <button id="journal-submit">Submit</button>
     </div>
   );
-};
+}
 
-export default Journal;
+export default JournalPage;
