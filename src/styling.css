@@ -5,7 +5,7 @@ h1 {
     color: white;
     background-color: #F4DBC2;
     padding: 40px;
-    margin: 0;
+    margin-left: 10;
     border-radius: 5px;
 }
 
@@ -204,6 +204,17 @@ button[type="submit"]:hover {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
+.dropdown-menu-options {
+    display: flex;
+    position: absolute;
+    margin-top: 15px;
+    background: #FFFFE0;
+    color: rgb(203, 97, 97);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
 
 .dropdown-menu button {
     padding: 10px;
@@ -319,4 +330,20 @@ header h1 {
 .entry-date {
     font-size: 0.9em;
     color: #888;
+}
+
+button[type="submit-login"]{
+    font-family:"Goudy Old Style";
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgb(203, 97, 97);
+    color: #FFFFE0;
+    border: none;
+    margin-top: 30px;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
 }
