@@ -1,6 +1,6 @@
 import React from 'react';
 import SurveySlider from '../components/SurveySlider';
-import '../style.css';
+import '../styling.css';
 
 function SurveyPage() {
   return (
