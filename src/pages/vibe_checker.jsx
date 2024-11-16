@@ -1,17 +1,18 @@
 import React from 'react';
-import './VibeChecker.css';
+import SurveySlider from '../components/SurveySlider';
+import '../style.css';
 
-const VibeChecker = () => {
+function SurveyPage() {
   return (
-    <div className="vibe-checker">
-      <h2>Vibe Checker</h2>
+    <div>
+      <h1>Vibe Checker</h1>
       <form>
-        <label htmlFor="mood">How are you feeling today?</label>
-        <input type="range" id="mood" name="mood" min="1" max="10" />
+        <p>How are you feeling today?</p>
+        <SurveySlider />
         <button type="submit">Submit</button>
       </form>
     </div>
   );
-};
+}
 
-export default VibeChecker;
+export default SurveyPage;
