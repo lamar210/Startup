@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import Chroma from 'chroma-js';
-import { Picker } from 'emoji-mart';
 
 const Journal = () => {
   const [text, setText] = useState('');
-  const [selectedEmoji, setSelectedEmoji] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState('');
   const [color, setColor] = useState("#000000");
@@ -14,16 +12,19 @@ const Journal = () => {
     setText(e.target.value);
   };
 
-  const handleEmojiSelect = (emoji) => {
-    setSelectedEmoji(emoji.native);
+  const insertEmoji = (emoji) => {
+    setText(text + emoji);
+    setSelectedMenu('');
   };
 
   const handleColorChange = (event) => {
     setColor(event.target.value);
+    setSelectedMenu('');
   };
 
   const handleFontChange = (newFont) => {
     setFont(newFont);
+    setSelectedMenu('');
   };
 
   const lightenedColor = Chroma(color).brighten(1.5).hex();
@@ -32,7 +33,6 @@ const Journal = () => {
       <header>
         <h2>My Journal</h2>
       </header>
-
       <main>
         <form>
           <div>
@@ -62,7 +62,7 @@ const Journal = () => {
           </div>
 
           {selectedMenu === 'colors' && (
-            <div className="menu-box">
+            <div className="dropdown-menu-options">
               <input
                 type="color"
                 value={color}
@@ -87,9 +87,23 @@ const Journal = () => {
           )}
 
           {selectedMenu === 'emojis' && (
-            <div className="menu-box">
-              <Picker onSelect={handleEmojiSelect} />
-              {selectedEmoji && <p>Selected Emoji: {selectedEmoji}</p>}
+            <div className="dropdown-menu-options">
+              <div className="emoji-buttons">
+                {[
+                  '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉',
+                  '😊', '😎', '😍', '😘', '😜', '🤩', '😝', '😳', '😞',
+                  '😟', '😢', '😭', '😤', '😡', '🤬', '😱', '😨', '😰',
+                  '🤯', '🥵', '🥶',
+                ].map((emoji) => (
+                  <button
+                    type="button"
+                    key={emoji}
+                    onClick={() => insertEmoji(emoji)}
+                  >
+                    {emoji}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
 
