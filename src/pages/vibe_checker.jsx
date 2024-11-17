@@ -9,14 +9,14 @@ function VibeChecker() {
   const handleOtherTriggerChange = (event) => {
     setIsOtherTriggerChecked(event.target.checked);
     if (!event.target.checked) {
-      setOtherTriggerValue('');
+      setOtherTriggerValue(''); // Clear input if unchecked
     }
   };
 
   const handleOtherStrategyChange = (event) => {
     setIsOtherStrategyChecked(event.target.checked);
     if (!event.target.checked) {
-      setOtherStrategyValue('');
+      setOtherStrategyValue(''); // Clear input if unchecked
     }
   };
 
@@ -75,6 +75,7 @@ function VibeChecker() {
               />
               Other:
             </label>
+            {/* Conditionally render the input for "Other" trigger only if checked */}
             {isOtherTriggerChecked && (
               <input 
                 type="text" 
@@ -116,6 +117,7 @@ function VibeChecker() {
               />
               Other:
             </label>
+            {/* Conditionally render the input for "Other" strategy only if checked */}
             {isOtherStrategyChecked && (
               <input 
                 type="text" 
