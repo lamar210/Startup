@@ -11,11 +11,12 @@ const Login = () => {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
+    localStorage.setItem('userEmail', email);
+    window.location.href = '/main_page';
   };
 
   return (
     <div className="login-page">
-      
       <main>
         <center>
           <h2>Login to Your Account</h2>
@@ -39,7 +40,7 @@ const Login = () => {
               required
             />
             <div>
-            <button type="submit-login">Login</button>
+              <button type="submit">Login</button>
             </div>
           </form>
 
