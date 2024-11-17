@@ -8,6 +8,12 @@ const Journal = () => {
   const [color, setColor] = useState("#000000");
   const [font, setFont] = useState("Roboto");
 
+  const getDate = () => {
+    const today = new Date();
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    return today.toLocaleDateString('en-US', options);
+  };
+
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
@@ -27,6 +33,24 @@ const Journal = () => {
     setSelectedMenu('');
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const date = getDate();
+    const journalEntries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+
+    const newEntry = {
+      title: `Entry ${journalEntries.length + 1}`,
+      date: date,
+      content: text,
+    };
+
+    journalEntries.push(newEntry);
+    localStorage.setItem('journalEntries', JSON.stringify(journalEntries));
+
+    setText('');
+  };
+
   const lightenedColor = Chroma(color).brighten(1.5).hex();
   return (
     <div className="journal-page">
@@ -34,7 +58,7 @@ const Journal = () => {
         <h2>My Journal</h2>
       </header>
       <main>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <a
               href="#"
