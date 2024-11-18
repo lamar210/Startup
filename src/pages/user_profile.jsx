@@ -18,8 +18,24 @@ function UserProfile() {
       });
     }
   }, []);
+  const getMessage = () => {
+    const { happiness, stress, energy } = moodScores;
+    if (stress > happiness) {
+      return (
+        <p>
+          Your moods have been down lately. Consider reaching out to someone you trust or engaging in activities that uplift you. Remember, it's okay to not be okay. Always ask for help when you need it.
+        </p>
+      );
+    } else if (happiness >= stress && happiness >= energy) {
+      return (
+        <p>
+          You are doing great! You have managed to keep up with healthy habits, and your moods have been positive. Keep it up and continue to engage in activities that bring you calmness and joy! Remember it is a good day to have a good day.
+        </p>
+      );
+    }
+    return null;
+  };
 
-  
   const data = [
     {
       mood: 'Happiness',
@@ -34,15 +50,15 @@ function UserProfile() {
     {
       mood: 'Energy',
       YourScore: moodScores.energy,
-      Others: 80, 
+      Others: 80,
     },
   ];
   const chartSettings = {
-    keys: ['YourScore', 'Others'],
+    keys: ['YourScore', 'Others (This many people have shared the same emotions and moods as you today)'],
     indexBy: 'mood',
     margin: { top: 50, right: 130, bottom: 50, left: 60 },
     padding: 0.3,
-    colors: ({ id }) => (id === 'YourScore' ? 'rgb(203, 97, 97)' : '#FFFACD'), // "YourScore" in dark red, "Others" in pale yellow
+    colors: ({ id }) => (id === 'YourScore' ? 'rgb(203, 97, 97)' : '#FFFACD'),
     borderColor: { from: 'color', modifiers: [['darker', 1.6]] },
     axisBottom: {
       tickSize: 5,
@@ -74,34 +90,17 @@ function UserProfile() {
         itemDirection: 'left-to-right',
         itemOpacity: 0.85,
         symbolSize: 20,
-        effects: [
-          {
-            on: 'hover',
-            style: {
-              itemOpacity: 1,
-            },
-          },
-        ],
       },
     ],
-    enableLabel: false,
   };
-  
+
   return (
     <div>
-      <main>
-        <h2>Mood Statistics</h2>
-        <p>Your mood statistics are represented as poll results:</p>
-
-        <div style={{ height: '400px' }}>
-          <ResponsiveBar data={data} {...chartSettings} />
-        </div>
-
-        <h3>Your Previous Journal Entries</h3>
-        <div>
-          <a href="/journal_entries">Journal entries</a>
-        </div>
-      </main>
+      <h2>User Profile</h2>
+      {getMessage()}
+      <div style={{ height: 400 }}>
+        <ResponsiveBar data={data} {...chartSettings} />
+      </div>
     </div>
   );
 }

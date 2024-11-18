@@ -1,31 +1,40 @@
 import React, { useState } from 'react';
 
 function VibeChecker() {
-  const [isOtherTriggerChecked, setIsOtherTriggerChecked] = useState(false);
-  const [isOtherStrategyChecked, setIsOtherStrategyChecked] = useState(false);
+  const [isOtherTriggerChecked, IsOtherOpt] = useState(false);
+  const [isOtherStrategyChecked, IsotherStrategy] = useState(false);
   const [otherTriggerValue, setOtherTriggerValue] = useState('');
   const [otherStrategyValue, setOtherStrategyValue] = useState('');
+  const [moodValue, setMoodValue] = useState(5);
+  const [shareFeelingsValue, setShareFeelingsValue] = useState(3);
 
-  const handleOtherTriggerChange = (event) => {
-    setIsOtherTriggerChecked(event.target.checked);
+  const handleOtherTrigger = (event) => {
+    IsOtherOpt(event.target.checked);
     if (!event.target.checked) {
-      setOtherTriggerValue(''); // Clear input if unchecked
+      setOtherTriggerValue(''); 
+    }
+  };
+  const handleOtherStrategy = (event) => {
+    IsotherStrategy(event.target.checked);
+    if (!event.target.checked) {
+      setOtherStrategyValue('');
     }
   };
 
-  const handleOtherStrategyChange = (event) => {
-    setIsOtherStrategyChecked(event.target.checked);
-    if (!event.target.checked) {
-      setOtherStrategyValue(''); // Clear input if unchecked
-    }
-  };
-
-  const handleOtherTriggerInputChange = (event) => {
+  const handleOtherTriggerInput = (event) => {
     setOtherTriggerValue(event.target.value);
   };
 
   const handleOtherStrategyInputChange = (event) => {
     setOtherStrategyValue(event.target.value);
+  };
+
+  const handleMoodSlider = (event) => {
+    setMoodValue(event.target.value); 
+  };
+
+  const handleShareFeelingsSlider = (event) => {
+    setShareFeelingsValue(event.target.value);  
   };
 
   return (
@@ -35,7 +44,14 @@ function VibeChecker() {
       <form>
         <div>
           <p>1. How did you wake up feeling today?</p>
-          <input type="range" min="1" max="10" value="5" step="0.1" />
+          <input 
+            type="range" 
+            min="1" 
+            max="10" 
+            value={moodValue}
+            step="0.1" 
+            onChange={handleMoodSlider}
+          />
           <div className="slider-labels">
             <span> Really bad,<br />sad, <br />and/or numb</span>
             <span> Neutral</span>
@@ -71,11 +87,10 @@ function VibeChecker() {
                 value="other" 
                 id="trigger-other" 
                 checked={isOtherTriggerChecked} 
-                onChange={handleOtherTriggerChange}
+                onChange={handleOtherTrigger}
               />
               Other:
             </label>
-            {/* Conditionally render the input for "Other" trigger only if checked */}
             {isOtherTriggerChecked && (
               <input 
                 type="text" 
@@ -83,7 +98,7 @@ function VibeChecker() {
                 aria-label="Specify other trigger" 
                 placeholder="Please specify..." 
                 value={otherTriggerValue} 
-                onChange={handleOtherTriggerInputChange}
+                onChange={handleOtherTriggerInput}
               />
             )}
           </div>
@@ -113,11 +128,10 @@ function VibeChecker() {
                 value="other" 
                 id="strategy-other" 
                 checked={isOtherStrategyChecked} 
-                onChange={handleOtherStrategyChange}
+                onChange={handleOtherStrategy}
               />
               Other:
             </label>
-            {/* Conditionally render the input for "Other" strategy only if checked */}
             {isOtherStrategyChecked && (
               <input 
                 type="text" 
@@ -130,7 +144,6 @@ function VibeChecker() {
             )}
           </div>
         </div>
-
         <div>
           <p>6. What do you hope to achieve by tracking your moods and feelings?</p>
           <textarea rows="7" cols="70" placeholder="Express it here..." ></textarea>
@@ -138,7 +151,14 @@ function VibeChecker() {
 
         <div>
           <p>7. How likely are you to share your feelings with someone close to you?</p>
-          <input type="range" min="1" max="5" value="3" step="0.1" />
+          <input 
+            type="range" 
+            min="1" 
+            max="5" 
+            value={shareFeelingsValue}
+            step="0.1" 
+            onChange={handleShareFeelingsSlider}
+          />
           <div className="slider-labels">
             <span>Not likely</span>
             <span>Maybe (depends on the person)</span>
