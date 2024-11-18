@@ -7,7 +7,7 @@ const JournalEntriesPage = () => {
   return (
     <div className="journal-entries-page">
       <header>
-        <h1>My Journal Entries</h1>
+        <h2>My Journal Entries</h2>
       </header>
       <main>
         <div className="entries-list">
