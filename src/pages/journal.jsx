@@ -131,6 +131,25 @@ const Journal = () => {
             </div>
           )}
 
+          {selectedMenu === "stickers" && (
+            <div className="dropdown-menu-options stickers-menu">
+              {Array.from({ length: 23 }, (_, i) => `stickers/sticker${i + 1}.png`).map((stickerPath) => (
+                <button
+                  type="button"
+                  key={stickerPath}
+                  onClick={() => insertSticker(stickerPath)}
+                >
+                  <img
+                    src={`/${stickerPath}`}
+                    alt="sticker"
+                    style={{ width: "30px", height: "30px" }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+
+
           <div>
             <textarea
               id="journal_text"

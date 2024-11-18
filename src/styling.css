@@ -353,3 +353,18 @@ button[type="submit-login"]{
     width: 100px;
     height: 30px;
 }
+
+.contenteditable {
+    background-color: #FFFFF0;
+    border-radius: 17px;
+    width: 100%;
+    min-height: 230px;
+    padding: 10px;
+    font-size: 14px;
+    color: #4a4747;
+    resize: both;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    overflow: auto;
+    outline: none;
+}
