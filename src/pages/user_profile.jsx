@@ -23,13 +23,16 @@ function UserProfile() {
     if (stress > happiness) {
       return (
         <p>
-          Your moods have been down lately. Consider reaching out to someone you trust or engaging in activities that uplift you. Remember, it's okay to not be okay. Always ask for help when you need it.
+          Your moods have been down lately. Consider reaching out to someone you trust or engaging in activities that
+          uplift you. Remember, it's okay to not be okay. Always ask for help when you need it.
         </p>
       );
     } else if (happiness >= stress && happiness >= energy) {
       return (
         <p>
-          You are doing great! You have managed to keep up with healthy habits, and your moods have been positive. Keep it up and continue to engage in activities that bring you calmness and joy! Remember it is a good day to have a good day.
+          You are doing great! You have managed to keep up with healthy habits, and your moods have been positive. Keep
+          it up and continue to engage in activities that bring you calmness and joy! Remember it is a good day to have
+          a good day.
         </p>
       );
     }
@@ -54,7 +57,7 @@ function UserProfile() {
     },
   ];
   const chartSettings = {
-    keys: ['YourScore', 'Others (This many people have shared the same emotions and moods as you today)'],
+    keys: ['YourScore', 'Others'],
     indexBy: 'mood',
     margin: { top: 50, right: 130, bottom: 50, left: 60 },
     padding: 0.3,
@@ -90,17 +93,41 @@ function UserProfile() {
         itemDirection: 'left-to-right',
         itemOpacity: 0.85,
         symbolSize: 20,
+        effects: [
+          {
+            on: 'hover',
+            style: {
+              itemOpacity: 1,
+            },
+          },
+        ],
       },
     ],
+    enableLabel: false,
   };
 
   return (
     <div>
-      <h2>User Profile</h2>
-      {getMessage()}
-      <div style={{ height: 400 }}>
-        <ResponsiveBar data={data} {...chartSettings} />
-      </div>
+      <main>
+        <h2>Mood Statistics</h2>
+        <p>Your mood statistics are represented below:</p>
+        <p>And this many people have shared the same emotions and moods as you-- you are not alone in this.</p>
+
+
+        <div style={{ height: '400px' }}>
+          <ResponsiveBar data={data} {...chartSettings} />
+        </div>
+
+        <div>
+          <h3>Reflection</h3>
+          {getMessage()}
+        </div>
+
+        <h3>Your Previous Journal Entries</h3>
+        <div>
+          <a href="/journal_entries">Journal entries</a>
+        </div>
+      </main>
     </div>
   );
 }
