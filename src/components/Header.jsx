@@ -14,7 +14,7 @@ function Header() {
                 <div className="username">
                     <Link to="/user_profile">username@email.com</Link>
                     <img 
-                        src="C:Users\USER\Downloads\usernamelogo.jpeg" 
+                        src="C:Users\USER\Downloads\username_logo.png" 
                         alt="Account Icon" 
                         className="account-icon" 
                     />
