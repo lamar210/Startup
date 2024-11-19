@@ -11,7 +11,7 @@ h1 {
 h1 a {
     text-decoration: none;
     color: white;
-    margin-right: 1248px;
+    margin-right: 1200px;
 }
 
 h1 a:hover {
@@ -21,7 +21,7 @@ h1 a:hover {
 .username {
     font-family: "Baby Kruffy";
     float: right;
-    margin-top: -90px;
+    margin-top: -70px;
     margin-right: 10px;
     font-size: medium;
     font-weight: bold;

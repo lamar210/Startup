@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Chroma from 'chroma-js';
 
 const Journal = () => {
@@ -7,6 +7,8 @@ const Journal = () => {
   const [selectedMenu, setSelectedMenu] = useState('');
   const [color, setColor] = useState("#000000");
   const [font, setFont] = useState("Roboto");
+  const menuRef = useRef(null);
+  const chromaRef = useRef(null);
 
   const getDate = () => {
     const today = new Date();
@@ -33,6 +35,11 @@ const Journal = () => {
     setSelectedMenu('');
   };
 
+  const insertSticker = (stickerPath) => {
+    setText(text + ` [Sticker: ${stickerPath}]`);
+    setSelectedMenu("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,6 +59,26 @@ const Journal = () => {
   };
 
   const lightenedColor = Chroma(color).brighten(1.5).hex();
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        chromaRef.current &&
+        !chromaRef.current.contains(event.target)
+      ) {
+        setSelectedMenu("");
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <div className="journal-page">
       <header>
@@ -59,7 +86,7 @@ const Journal = () => {
       </header>
       <main>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div ref={menuRef}>
             <a
               href="#"
               className="menu-button"
@@ -86,7 +113,7 @@ const Journal = () => {
           </div>
 
           {selectedMenu === 'colors' && (
-            <div className="dropdown-menu-options">
+            <div className="dropdown-menu-options" ref={chromaRef}>
               <input
                 type="color"
                 value={color}
@@ -113,8 +140,7 @@ const Journal = () => {
           {selectedMenu === 'emojis' && (
             <div className="dropdown-menu-options">
               <div className="emoji-buttons">
-                {[
-                  '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉',
+                {[ '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉',
                   '😊', '😎', '😍', '😘', '😜', '🤩', '😝', '😳', '😞',
                   '😟', '😢', '😭', '😤', '😡', '🤬', '😱', '😨', '😰',
                   '🤯', '🥵', '🥶',
@@ -148,7 +174,6 @@ const Journal = () => {
               ))}
             </div>
           )}
-
 
           <div>
             <textarea
