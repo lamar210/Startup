@@ -83,3 +83,15 @@ For this deliverable, I properly styled the website to achieve a cohesive and us
 - [x] Application Elements: Good contrast and color combinations with rest areas on each page.
 - [x] Application Text Content: Consistent fonts used throughout for readability and functionality.
 - [x] Application Images: styled my image and user icon.
+
+## React deliverable
+For this deliverable, I focused on converting the website to React, ensuring proper functionality and integration with the existing features.
+
+- [x] React Setup: Set up a React environment using Vite and integrated React Router for routing between pages.
+- [x] State Management: Utilized useState and useEffect to handle component states dynamically, ensuring proper updates across the app.
+- [x] Componentization: Split the application into modular functional React components, which allows better code management and reusability.
+- [x] Event Handlers: Applied event handlers for actions like toggling the menu,and submitting the survey.
+- [x] Dynamic Data Handling: Implemented local storage functionality to save and retrieve journal entries, making the data persistent across pages.
+- [x] Menu Toggles and UI Updates: Enabled dropdown menu features for changing colors, fonts, and inserting emojis while ensuring smooth UI updates.
+- [x] Responsive Design: Ensured that the app is responsive, has a good appearance and usability across different devices and screen sizes.
+- [x] Error Handling and Cleanup: Included proper error handling and cleanup in useEffect to avoid memory leaks and ensure app stability.
