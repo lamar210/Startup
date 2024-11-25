@@ -7,11 +7,12 @@ function VibeChecker() {
   const [otherStrategyValue, setOtherStrategyValue] = useState('');
   const [moodValue, setMoodValue] = useState(5);
   const [shareFeelingsValue, setShareFeelingsValue] = useState(3);
+  const [message, setMessage] = useState('');
 
   const handleOtherTrigger = (event) => {
     IsOtherOpt(event.target.checked);
     if (!event.target.checked) {
-      setOtherTriggerValue(''); 
+      setOtherTriggerValue('');
     }
   };
   const handleOtherStrategy = (event) => {
@@ -30,18 +31,49 @@ function VibeChecker() {
   };
 
   const handleMoodSlider = (event) => {
-    setMoodValue(event.target.value); 
+    setMoodValue(event.target.value);
   };
 
   const handleShareFeelingsSlider = (event) => {
-    setShareFeelingsValue(event.target.value);  
+    setShareFeelingsValue(event.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+      mood: moodValue,
+      shareFeelings: shareFeelingsValue,
+      otherTrigger: isOtherTriggerChecked ? otherTriggerValue : '',
+      otherStrategy: isOtherStrategyChecked ? otherStrategyValue : '',
+    };
+
+    try {
+      const response = await fetch('/api/survey', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage('Thank you for your submission!');
+      } else {
+        setMessage('There was an issue with your submission. Please try again.');
+      }
+    } catch (err) {
+      setMessage('There was an issue with your submission. Please try again.');
+    }
   };
 
   return (
     <main>
       <h2>Daily Check-In</h2>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <p>1. How did you wake up feeling today?</p>
           <input 
@@ -53,13 +85,9 @@ function VibeChecker() {
             onChange={handleMoodSlider}
           />
           <div className="slider-labels">
-            <span> Really bad,<br />sad, <br />and/or numb</span>
-            <span> Neutral</span>
-            <span> It is a good day <br />to have a good day</span>
-          </div>
-          <div>
-            <button type="button" aria-label="Note Entry" id="note-entry-button"> + </button>
-            <input type="text" id="add-notes" aria-label="Specify" placeholder="Please specify..." />
+            <span>Really bad,<br />sad, <br />and/or numb</span>
+            <span>Neutral</span>
+            <span>It is a good day <br />to have a good day</span>
           </div>
         </div>
 
@@ -169,11 +197,7 @@ function VibeChecker() {
         <button type="submit">Submit</button>
       </form>
 
-      <div id="message" style={{ display: 'none' }}>
-        <p>Thank you for your submission!</p>
-        <br />
-        <p>Check your profile for results.</p>
-      </div>
+      {message && <h1>{message}</h1>}
     </main>
   );
 }

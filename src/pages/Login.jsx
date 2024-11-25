@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { loginUser } from '../services/user_services';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -8,11 +7,26 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
     try {
-      const data = await loginUser({ email, password });
-      localStorage.setItem('token', data.token); 
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.message === 'Login successful') {
+        localStorage.setItem('token', data.token);
+        window.location.href = '/main_page';
+      } else {
+        setError('Invalid email or password.');
+      }
     } catch (err) {
-      setError('Login failed. Please try again.');
+      setError('Login failed. Please try again later.');
     }
   };
 
