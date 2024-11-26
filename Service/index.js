@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const bodyParser = require('body-parser');
 
 let users = [];
 let journalEntries = [];
@@ -10,6 +11,8 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 app.use(express.static('public'));
+app.use(bodyParser.json());
+
 
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
@@ -48,7 +51,7 @@ apiRouter.post('/login', (req, res) => {
   if (!user) {
     return res.status(401).json({ message: 'Invalid email or password' });
   }
-  res.json({ message: 'Login successful' });
+  res.json({ message: 'Login successful', user });
 });
 
 apiRouter.post('/journal', (req, res) => {
