@@ -197,7 +197,7 @@ function VibeChecker() {
         <button type="submit">Submit</button>
       </form>
 
-      {message && <h1>{message}</h1>}
+      {message && <h2>{message}</h2>}
     </main>
   );
 }

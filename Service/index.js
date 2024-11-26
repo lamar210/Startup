@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 
 let users = [];
 let journalEntries = [];
@@ -11,8 +11,7 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 app.use(express.static('public'));
-app.use(bodyParser.json());
-
+app.use(cors());
 
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
@@ -32,7 +31,6 @@ apiRouter.get('/weather', async (req, res) => {
     res.status(500).json({ message: 'Error displaying weather data', error });
   }
 });
-
 
 apiRouter.post('/register', (req, res) => {
   const { username, email, password } = req.body;
