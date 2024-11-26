@@ -7,6 +7,7 @@ function UserProfile() {
     stress: 0,
     energy: 0,
   });
+  const [moodMessage, setMoodMessage] = useState('');
 
   useEffect(() => {
     const savedScores = JSON.parse(localStorage.getItem('surveyData'));
@@ -16,28 +17,17 @@ function UserProfile() {
         stress: savedScores.stress,
         energy: savedScores.energy,
       });
+
+      fetch('/api/evaluate-mood-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(savedScores),
+      })
+        .then((response) => response.json())
+        .then((data) => setMoodMessage(data.message))
+        .catch((error) => console.error('Message can not be displayed', error));
     }
   }, []);
-  const getMessage = () => {
-    const { happiness, stress, energy } = moodScores;
-    if (stress > happiness) {
-      return (
-        <p>
-          Your moods have been down lately. Consider reaching out to someone you trust or engaging in activities that
-          uplift you. Remember, it's okay to not be okay. Always ask for help when you need it.
-        </p>
-      );
-    } else if (happiness >= stress && happiness >= energy) {
-      return (
-        <p>
-          You are doing great! You have managed to keep up with healthy habits, and your moods have been positive. Keep
-          it up and continue to engage in activities that bring you calmness and joy! Remember it is a good day to have
-          a good day.
-        </p>
-      );
-    }
-    return null;
-  };
 
   const data = [
     {
@@ -113,14 +103,13 @@ function UserProfile() {
         <p>Your mood statistics are represented below:</p>
         <p>And this many people have shared the same emotions and moods as you-- you are not alone in this.</p>
 
-
         <div style={{ height: '400px' }}>
           <ResponsiveBar data={data} {...chartSettings} />
         </div>
 
         <div>
-          <h3>Reflection</h3>
-          {getMessage()}
+          <h3>Your Mood Reflection</h3>
+          <p>{moodMessage}</p>
         </div>
 
         <h3>Your Previous Journal Entries</h3>

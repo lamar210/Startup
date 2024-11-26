@@ -47,6 +47,22 @@ apiRouter.post('/survey', (req, res) => {
   res.status(201).json({ message: 'Survey response saved successfully' });
 });
 
+apiRouter.post('/evaluate-mood-message', (req, res) => {
+  const { happiness, stress, energy } = req.body;
+
+  let message = '';
+
+  if (stress > happiness) {
+    message = "Your moods have been down lately. Consider reaching out to someone you trust or engaging in activities that uplift you. Remember, it's okay to not be okay. Always ask for help when you need it.";
+  } else if (happiness >= stress && happiness >= energy) {
+    message = "You are doing great! You have managed to keep up with healthy habits, and your moods have been positive. Keep it up and continue to engage in activities that bring you calmness and joy! Remember it is a good day to have a good day.";
+  } else {
+    message = "You're managing okay, but finding a balance could help you feel better. Try focusing on your well-being through small steps each day.";
+  }
+
+  res.json({ message });
+});
+
 apiRouter.get('/users', (_req, res) => {
   res.json(users);
 });
