@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const axios = require('axios');
 
 let users = [];
 let journalEntries = [];
@@ -12,6 +13,23 @@ app.use(express.static('public'));
 
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
+
+apiRouter.get('/weather', async (req, res) => {
+  const { latitude, longitude } = req.query;
+  try {
+    const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast`, {
+      params: {
+        latitude,
+        longitude,
+        current: 'temperature_2m,relative_humidity_2m,rain,weather_code',
+      },
+    });
+    res.json(weatherData.data);
+  } catch (error) {
+    res.status(500).json({ message: 'Error displaying weather data', error });
+  }
+});
+
 
 apiRouter.post('/register', (req, res) => {
   const { username, email, password } = req.body;
