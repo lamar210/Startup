@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const axios = require('axios');
 const cors = require('cors');
 
 let users = [];
 let journalEntries = [];
 let surveyResponses = [];
+let surveyScores = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -16,20 +16,20 @@ app.use(cors());
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-apiRouter.get('/weather', async (req, res) => {
-  const { latitude, longitude } = req.query;
-  try {
-    const weatherData = await axios.get(`https://api.open-meteo.com/v1/forecast`, {
-      params: {
-        latitude,
-        longitude,
-        current: 'temperature_2m,relative_humidity_2m,rain,weather_code',
-      },
-    });
-    res.json(weatherData.data);
-  } catch (error) {
-    res.status(500).json({ message: 'Error displaying weather data', error });
+apiRouter.post('/survey-scores', (req, res) => {
+  const { happiness, stress, energy } = req.body;
+
+  if (happiness == null || stress == null || energy == null) {
+    return res.status(400).json({ message: 'All scores (happiness, stress, energy) are required.' });
   }
+
+  const newScore = { id: surveyScores.length + 1, happiness, stress, energy };
+  surveyScores.push(newScore);
+  res.status(201).json({ message: 'Survey scores saved successfully', score: newScore });
+});
+
+apiRouter.get('/survey-scores', (_req, res) => {
+  res.json(surveyScores);
 });
 
 apiRouter.post('/register', (req, res) => {
