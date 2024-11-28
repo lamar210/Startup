@@ -21,7 +21,8 @@ h1 a:hover {
 .username {
     font-family: "Baby Kruffy";
     float: right;
-    margin-top: -70px;
+    position: relative;
+    margin-top: -85px;
     margin-right: 10px;
     font-size: medium;
     font-weight: bold;
