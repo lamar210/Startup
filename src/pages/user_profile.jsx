@@ -10,22 +10,33 @@ function UserProfile() {
   const [moodMessage, setMoodMessage] = useState('');
 
   useEffect(() => {
-    const savedScores = JSON.parse(localStorage.getItem('surveyData'));
-    if (savedScores) {
-      setMoodScores({
-        happiness: savedScores.happiness,
-        stress: savedScores.stress,
-        energy: savedScores.energy,
-      });
+    const storedScores = JSON.parse(localStorage.getItem('surveyScores'));
 
-      fetch('/api/evaluate-mood-message', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(savedScores),
-      })
-        .then((response) => response.json())
-        .then((data) => setMoodMessage(data.message))
-        .catch((error) => console.error('Message can not be displayed', error));
+    if (storedScores) {
+      setMoodScores({
+        happiness: storedScores.happiness || 0,
+        stress: storedScores.stress || 0,
+        energy: storedScores.energy || 0,
+      });
+    }
+
+    const fetchMoodMessage = async () => {
+      try {
+        const moodResponse = await fetch('/api/evaluate-mood-message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(storedScores),
+        });
+
+        const moodData = await moodResponse.json();
+        setMoodMessage(moodData.message);
+      } catch (error) {
+        console.error('Failed to fetch mood message:', error);
+      }
+    };
+
+    if (storedScores) {
+      fetchMoodMessage();
     }
   }, []);
 

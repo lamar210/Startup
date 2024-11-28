@@ -60,6 +60,11 @@ function VibeChecker() {
       const data = await response.json();
       
       if (response.ok) {
+        localStorage.setItem('surveyScores', JSON.stringify({
+          happiness: formData.mood,
+          stress: formData.shareFeelings,
+          energy: 5,
+        }));
         setMessage('Thank you for your submission!');
       } else {
         setMessage('There was an issue with your submission. Please try again.');
