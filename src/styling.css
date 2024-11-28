@@ -369,3 +369,27 @@ button[type="submit-login"]{
     overflow: auto;
     outline: none;
 }
+
+.weather-button {
+    font-family: "Goudy Old Style";
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    background: rgb(203, 97, 97);
+    color: #FFFFE0;
+    border: none;
+    position: fixed;
+    top: 280px;
+    right: 0;
+    cursor: pointer;
+    width: 50px;
+    height: 30px;
+}
+
+.weather-button:hover {
+    background-color: #FFFFE0;
+    color: rgb(203, 97, 97);
+    border: 1px solid rgb(203, 97, 97);
+}

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const axios = require('axios');
+
 
 let users = [];
 let journalEntries = [];
@@ -15,6 +17,18 @@ app.use(cors());
 
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
+
+apiRouter.get('/weather', async (req, res) => {
+  const { lat, lon } = req.query;
+  const apiKey = 'YOUR_API_KEY';
+  
+  try {
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching weather data' });
+  }
+});
 
 apiRouter.post('/survey-scores', (req, res) => {
   const { happiness, stress, energy } = req.body;

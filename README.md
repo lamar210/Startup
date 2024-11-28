@@ -95,3 +95,11 @@ For this deliverable, I focused on converting the website to React, ensuring pro
 - [x] Menu Toggles and UI Updates: Enabled dropdown menu features for changing colors, fonts, and inserting emojis while ensuring smooth UI updates.
 - [x] Responsive Design: Ensured that the app is responsive, has a good appearance and usability across different devices and screen sizes.
 - [x] Error Handling and Cleanup: Included proper error handling and cleanup in useEffect to avoid memory leaks and ensure app stability.
+
+## Service deliverable
+For this deliverable, I worked on implementing backend services to handle data processing (in local storage) for the journaling platform.
+
+- [x] Node.js/Express HTTP Service: Created endpoints for managing user login and mood data.
+- [x] Static Middleware: Configured middleware to serve frontend files effectively.
+- [x] Backend Service Endpoints: Endpoints for journal entries, login, and survey data are functional.
+- [x] Frontend to Backend Calls: Connected endpoints using Axios for data transfer between React and the backend.

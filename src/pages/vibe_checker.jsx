@@ -69,6 +69,15 @@ function VibeChecker() {
       } else {
         setMessage('There was an issue with your submission. Please try again.');
       }
+  
+      const weatherResponse = await fetch('/api/weather?lat=YOUR_LAT&lon=YOUR_LON');
+      const weatherData = await weatherResponse.json();
+      if (weatherResponse.ok) {
+        console.log('Weather:', weatherData.weather[0].description);
+      } else {
+        console.log('Weather fetch failed');
+      }
+  
     } catch (err) {
       setMessage('There was an issue with your submission. Please try again.');
     }
@@ -201,6 +210,10 @@ function VibeChecker() {
 
         <button type="submit">Submit</button>
       </form>
+
+      <button className="weather-button" type="button">
+        🌤
+      </button>
 
       {message && <h2>{message}</h2>}
     </main>
