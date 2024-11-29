@@ -70,16 +70,30 @@ function VibeChecker() {
         setMessage('There was an issue with your submission. Please try again.');
       }
   
-      const weatherResponse = await fetch('/api/weather?lat=YOUR_LAT&lon=YOUR_LON');
-      const weatherData = await weatherResponse.json();
-      if (weatherResponse.ok) {
-        console.log('Weather:', weatherData.weather[0].description);
-      } else {
-        console.log('Weather fetch failed');
-      }
-  
     } catch (err) {
       setMessage('There was an issue with your submission. Please try again.');
+    }
+  };
+
+  const handleWeatherClick = async () => {
+    const apiBase = 'https://dragon.best/api/glax_weather.json';
+    const params = {
+      lat: '7.4474',
+      lon: '46.9481',
+      units: 'metric',
+    };
+  
+    const queryString = new URLSearchParams(params).toString();
+    const apiUrl = `${apiBase}?${queryString}`;
+  
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      console.log('Current Weather:', data);
+      setMessage(`Weather: ${data.weather || 'N/A'}`);
+    } catch (error) {
+      console.error('Failed to fetch weather data:', error);
+      setMessage('Weather data fetch failed.');
     }
   };
 
@@ -211,8 +225,8 @@ function VibeChecker() {
         <button type="submit">Submit</button>
       </form>
 
-      <button className="weather-button" type="button">
-        🌤
+      <button className="weather-button" type="button" onClick={handleWeatherClick}>
+      🌤
       </button>
 
       {message && <h2>{message}</h2>}
