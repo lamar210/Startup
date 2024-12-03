@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -33,10 +34,15 @@ app.use('/api', apiRouter);
 apiRouter.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await usersCollection.findOne({ email, password });
+    const user = await usersCollection.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+    user.password = undefined;
     res.json({ message: 'Login successful', user });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error });
@@ -50,7 +56,8 @@ apiRouter.post('/register', async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: 'Account already exists' });
     }
-    const newUser = { username, email, password };
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = { username, email, password: hashedPassword };
     await usersCollection.insertOne(newUser);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {

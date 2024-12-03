@@ -40,23 +40,36 @@ const Journal = () => {
     setSelectedMenu("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const date = getDate();
-    const journalEntries = JSON.parse(localStorage.getItem('journalEntries')) || [];
-
+  
     const newEntry = {
       title: `Entry ${journalEntries.length + 1}`,
       date: date,
       content: text,
     };
-
-    journalEntries.push(newEntry);
-    localStorage.setItem('journalEntries', JSON.stringify(journalEntries));
-
-    setText('');
+  
+    try {
+      const response = await fetch('/api/journal-entries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEntry),
+      });
+  
+      if (response.ok) {
+        setText('');
+      } else {
+        console.error('Failed to save journal entry');
+      }
+    } catch (error) {
+      console.error('Error saving journal entry:', error);
+    }
   };
+  
 
   const lightenedColor = Chroma(color).brighten(1.5).hex();
 
