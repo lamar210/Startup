@@ -38,14 +38,24 @@ function VibeChecker() {
     setShareFeelingsValue(event.target.value);
   };
 
+  const handleEnergySlider = (event) => {
+    setEnergyValue(event.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     const formData = {
       mood: moodValue,
       shareFeelings: shareFeelingsValue,
+      energy: energyValue,
       otherTrigger: isOtherTriggerChecked ? otherTriggerValue : '',
       otherStrategy: isOtherStrategyChecked ? otherStrategyValue : '',
+      scores: {
+        happiness: moodValue,
+        stress: shareFeelingsValue,
+        energy: energyValue,
+      },
     };
 
     try {
@@ -60,16 +70,10 @@ function VibeChecker() {
       const data = await response.json();
       
       if (response.ok) {
-        localStorage.setItem('surveyScores', JSON.stringify({
-          happiness: formData.mood,
-          stress: formData.shareFeelings,
-          energy: 5,
-        }));
         setMessage('Thank you for your submission!');
       } else {
         setMessage('There was an issue with your submission. Please try again.');
       }
-  
     } catch (err) {
       setMessage('There was an issue with your submission. Please try again.');
     }
@@ -219,6 +223,23 @@ function VibeChecker() {
             <span>Not likely</span>
             <span>Maybe (depends on the person)</span>
             <span>Very likely</span>
+          </div>
+        </div>
+
+        <div>
+          <p>8. How much energy do you feel today?</p>
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={energyValue} 
+            step="0.1"
+            onChange={handleEnergySlider}
+          />
+          <div className="slider-labels">
+            <span>Very low energy</span>
+            <span>Neutral</span>
+            <span>Very high energy</span>
           </div>
         </div>
 
