@@ -77,19 +77,30 @@ apiRouter.get('/weather', async (req, res) => {
   }
 });
 
-apiRouter.post('/evaluate-mood-message', (req, res) => {
-  const { happiness, stress, energy } = req.body;
-  let message = '';
+apiRouter.post('/evaluate-mood-message', async (req, res) => {
+  const { email } = req.body;
 
-  if (stress > happiness) {
-    message = "Your moods have been down lately. Reach out to someone you trust or engage in uplifting activities. It's okay to not be okay.";
-  } else if (happiness >= stress && happiness >= energy) {
-    message = "You're doing great! Keep up healthy habits and continue enjoying activities that bring you joy.";
-  } else {
-    message = "You're managing okay, but finding balance could help you feel better. Focus on small well-being steps each day.";
+  try {
+    const user = await usersCollection.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const { happiness, stress, energy } = user.moodScores || {};
+    let message = '';
+
+    if (stress > happiness) {
+      message = "Your moods have been down lately. Reach out to someone you trust or engage in uplifting activities. It's okay to not be okay.";
+    } else if (happiness >= stress && happiness >= energy) {
+      message = "You're doing great! Keep up healthy habits and continue enjoying activities that bring you joy.";
+    } else {
+      message = "You're managing okay, but finding balance could help you feel better. Focus on small well-being steps each day.";
+    }
+
+    res.json({ message });
+  } catch (error) {
+    res.status(500).json({ message: 'Error evaluating mood message', error });
   }
-
-  res.json({ message });
 });
 
 app.use((_req, res) => {

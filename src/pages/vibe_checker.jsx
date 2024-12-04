@@ -107,7 +107,7 @@ function VibeChecker() {
 
       <form onSubmit={handleSubmit}>
         <div>
-          <p>1. How did you wake up feeling today?</p>
+          <div>1. How did you wake up feeling today?</div>
           <input 
             type="range" 
             min="1" 
@@ -124,12 +124,12 @@ function VibeChecker() {
         </div>
 
         <div>
-          <p>2. Did you try something out of your comfort zone today? How did it make you feel?</p>
+          <div>2. Did you try something out of your comfort zone today? How did it make you feel?</div>
           <textarea rows="7" cols="70" placeholder="Make sure to do it more if you enjoyed your experience :), if not express it here..." ></textarea>
         </div>
 
         <div>
-          <p>3. What was a major trigger for your mood today?</p>
+          <div>3. What was a major trigger for your mood today?</div>
           <div className="checkbox-group">
             <label>
               <input type="checkbox" name="trigger" value="school" /> School or academic stress
@@ -165,12 +165,12 @@ function VibeChecker() {
         </div>
 
         <div>
-          <p>4. Did you connect with someone today? How did it affect your mood?</p>
+          <div>4. Did you connect with someone today? How did it affect your mood?</div>
           <textarea rows="7" cols="70" placeholder="Make sure to keep the good ones in your circle, if not..." ></textarea>
         </div>
 
         <div>
-          <p>5. What coping strategies did you use today to manage your feelings?</p>
+          <div>5. What coping strategies did you use today to manage your feelings?</div>
           <div className="checkbox-group">
             <label>
               <input type="checkbox" name="strategy" value="walk" /> A walk with nature
@@ -205,12 +205,12 @@ function VibeChecker() {
           </div>
         </div>
         <div>
-          <p>6. What do you hope to achieve by tracking your moods and feelings?</p>
+          <div>6. What do you hope to achieve by tracking your moods and feelings?</div>
           <textarea rows="7" cols="70" placeholder="Express it here..." ></textarea>
         </div>
 
         <div>
-          <p>7. How likely are you to share your feelings with someone close to you?</p>
+          <div>7. How likely are you to share your feelings with someone close to you?</div>
           <input 
             type="range" 
             min="1" 
@@ -227,7 +227,7 @@ function VibeChecker() {
         </div>
 
         <div>
-          <p>8. How much energy do you feel today?</p>
+          <div>8. How much energy do you feel today?</div>
           <input
             type="range"
             min="1"

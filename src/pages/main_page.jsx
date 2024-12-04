@@ -31,8 +31,7 @@ const MainPage = () => {
       <footer>
         <div>
           <p>
-            //placeholder: Real-time updates will appear here (such as notified
-            reminders to do the daily check-in and/or journal entry).
+            <br></br>
           </p>
         </div>
       </footer>
