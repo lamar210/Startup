@@ -44,8 +44,10 @@ const Journal = () => {
     e.preventDefault();
   
     const date = getDate();
+    const userEmail = 'user@example.com';
   
     const newEntry = {
+      email: userEmail,
       title: `Entry ${journalEntries.length + 1}`,
       date: date,
       content: text,
@@ -68,8 +70,7 @@ const Journal = () => {
     } catch (error) {
       console.error('Error saving journal entry:', error);
     }
-  };
-  
+};
 
   const lightenedColor = Chroma(color).brighten(1.5).hex();
 

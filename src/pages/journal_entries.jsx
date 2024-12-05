@@ -7,7 +7,14 @@ const JournalEntriesPage = () => {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
-        const response = await fetch('/api/journal-entries');
+        const userEmail = 'user@example.com';
+        const response = await fetch(`/api/journal-entries`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: userEmail }),
+        });
         const data = await response.json();
         setJournalEntries(data);
       } catch (error) {

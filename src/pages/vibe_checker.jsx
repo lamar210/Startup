@@ -7,6 +7,7 @@ function VibeChecker() {
   const [otherStrategyValue, setOtherStrategyValue] = useState('');
   const [moodValue, setMoodValue] = useState(5);
   const [shareFeelingsValue, setShareFeelingsValue] = useState(3);
+  const [energyValue, setEnergyValue] = useState(5);
   const [message, setMessage] = useState('');
 
   const handleOtherTrigger = (event) => {
@@ -106,8 +107,8 @@ function VibeChecker() {
       <h2>Daily Check-In</h2>
 
       <form onSubmit={handleSubmit}>
-        <div>
-          <div>1. How did you wake up feeling today?</div>
+        <div className='question-container'>
+          <div className='question-container'>1. How did you wake up feeling today?</div>
           <input 
             type="range" 
             min="1" 
@@ -123,13 +124,13 @@ function VibeChecker() {
           </div>
         </div>
 
-        <div>
-          <div>2. Did you try something out of your comfort zone today? How did it make you feel?</div>
+        <div className='question-container'>
+          <div className='question-container'>2. Did you try something out of your comfort zone today? How did it make you feel?</div>
           <textarea rows="7" cols="70" placeholder="Make sure to do it more if you enjoyed your experience :), if not express it here..." ></textarea>
         </div>
 
-        <div>
-          <div>3. What was a major trigger for your mood today?</div>
+        <div className='question-container'>
+          <div className='question-container'>3. What was a major trigger for your mood today?</div>
           <div className="checkbox-group">
             <label>
               <input type="checkbox" name="trigger" value="school" /> School or academic stress
@@ -164,13 +165,13 @@ function VibeChecker() {
           </div>
         </div>
 
-        <div>
-          <div>4. Did you connect with someone today? How did it affect your mood?</div>
+        <div className='question-container'>
+          <div className='question-container'>4. Did you connect with someone today? How did it affect your mood?</div>
           <textarea rows="7" cols="70" placeholder="Make sure to keep the good ones in your circle, if not..." ></textarea>
         </div>
 
-        <div>
-          <div>5. What coping strategies did you use today to manage your feelings?</div>
+        <div className='question-container'>
+          <div className='question-container'>5. What coping strategies did you use today to manage your feelings?</div>
           <div className="checkbox-group">
             <label>
               <input type="checkbox" name="strategy" value="walk" /> A walk with nature
@@ -204,13 +205,13 @@ function VibeChecker() {
             )}
           </div>
         </div>
-        <div>
-          <div>6. What do you hope to achieve by tracking your moods and feelings?</div>
+        <div className='question-container'>
+          <div className='question-container'>6. What do you hope to achieve by tracking your moods and feelings?</div>
           <textarea rows="7" cols="70" placeholder="Express it here..." ></textarea>
         </div>
 
-        <div>
-          <div>7. How likely are you to share your feelings with someone close to you?</div>
+        <div className='question-container'>
+          <div className='question-container'>7. How likely are you to share your feelings with someone close to you?</div>
           <input 
             type="range" 
             min="1" 
@@ -226,8 +227,8 @@ function VibeChecker() {
           </div>
         </div>
 
-        <div>
-          <div>8. How much energy do you feel today?</div>
+        <div className='question-container'>
+          <div className='question-container'>8. How much energy do you feel today?</div>
           <input
             type="range"
             min="1"
