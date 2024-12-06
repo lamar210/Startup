@@ -2,22 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Header() {
-    const [user, setUser] = useState(null);
+    const [email, setEmail] = useState(null);
 
     useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await fetch('/api/current-user', { method: 'GET', credentials: 'include' });
-                if (response.ok) {
-                    const data = await response.json();
-                    setUser(data.user);
-                }
-            } catch (err) {
-                console.error('Error fetching user data:', err);
-            }
-        };
-
-        fetchUser();
+        const savedEmail = localStorage.getItem('userEmail');
+        if (savedEmail) {
+            setEmail(savedEmail);
+        }
     }, []);
 
     return (
@@ -30,8 +21,8 @@ function Header() {
 
             <nav>
                 <div className="username">
-                    {user ? (
-                        <Link to="/user_profile">{user.email}</Link>
+                    {email ? (
+                        <Link to="/user_profile">{email}</Link>
                     ) : (
                         <Link to="/login">Login</Link>
                     )}

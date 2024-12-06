@@ -45,24 +45,22 @@ apiRouter.post('/login', async (req, res) => {
     if (!isPasswordCorrect) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
-    user.password = undefined;
 
-    const token = jwt.sign({ userId: user._id, email: user.email }, '26aee579f54dd7c5c93e4cbc455347cd02e466e8cad9c3c4b08e3e976282d020', { expiresIn: '1h' });
-    res.json({ message: 'Login successful', user, token });
+    res.json({ message: 'Login successful', user: { email: user.email } });
   } catch (error) {
     res.status(500).json({ message: 'Error logging in', error });
   }
 });
 
 apiRouter.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
   try {
     const existingUser = await usersCollection.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'Account already exists' });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = { username, email, password: hashedPassword };
+    const newUser = { email, password: hashedPassword };
     await usersCollection.insertOne(newUser);
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
@@ -119,21 +117,28 @@ apiRouter.post('/journal-entries', async (req, res) => {
 });
 
 apiRouter.get('/current-user', async (req, res) => {
-  const token = req.headers['authorization']?.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ message: 'No token provided' });
+  const email = req.headers['authorization']?.split(' ')[1];
+  console.log("Authorization header:", req.headers['authorization']);
+
+  if (!email) {
+    return res.status(401).json({ message: 'No email provided' });
   }
-  
+
   try {
-    const decoded = jwt.verify(token, '26aee579f54dd7c5c93e4cbc455347cd02e466e8cad9c3c4b08e3e976282d020');
-    const user = await usersCollection.findOne({ _id: decoded.userId });
+    const user = await usersCollection.findOne({ email });
+    console.log("Extracted email:", email);
+    console.log("Fetched user:", user);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ user: { email: user.email, username: user.username } });
+    res.json({ user: { email: user.email } });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching user data', error });
   }
+});
+
+apiRouter.post('/logout', (req, res) => {
+  res.json({ message: 'Logged out successfully' });
 });
 
 app.listen(port, () => {

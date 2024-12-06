@@ -40,6 +40,11 @@ function UserProfile() {
     }
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('userEmail');
+    window.location.href = '/login';
+  };
+
   const data = [
     {
       mood: 'Happiness',
@@ -127,6 +132,7 @@ function UserProfile() {
         <div>
           <a href="/journal_entries">Journal entries</a>
         </div>
+        <button className="logout-button" onClick={logout}>Logout</button>
       </main>
     </div>
   );
