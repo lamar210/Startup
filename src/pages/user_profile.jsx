@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
+import { useNavigate } from 'react-router-dom';
 
 function UserProfile() {
   const [moodScores, setMoodScores] = useState({
@@ -40,9 +41,11 @@ function UserProfile() {
     }
   }, []);
 
+  const navigate = useNavigate();
+
   const logout = () => {
     localStorage.removeItem('userEmail');
-    window.location.href = '/login';
+    navigate('/login');
   };
 
   const data = [
