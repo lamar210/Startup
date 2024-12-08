@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useAuth } from '../AuthContext';
 
 function VibeChecker() {
+  const { email } = useAuth();
   const [isOtherTriggerChecked, IsOtherOpt] = useState(false);
   const [isOtherStrategyChecked, IsotherStrategy] = useState(false);
   const [otherTriggerValue, setOtherTriggerValue] = useState('');
@@ -45,7 +47,12 @@ function VibeChecker() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    if (!email) {
+      setMessage('You need to be logged in to submit the form!');
+      return;
+    }
+
     const formData = {
       mood: moodValue,
       shareFeelings: shareFeelingsValue,
@@ -69,7 +76,7 @@ function VibeChecker() {
       });
 
       const data = await response.json();
-      
+
       if (response.ok) {
         setMessage('Thank you for your submission!');
       } else {
@@ -87,18 +94,22 @@ function VibeChecker() {
       lon: '46.9481',
       units: 'metric',
     };
-  
+
     const queryString = new URLSearchParams(params).toString();
     const apiUrl = `${apiBase}?${queryString}`;
-  
+
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-      console.log('Current Weather:', data);
       setMessage(`Weather: ${data.weather || 'N/A'}`);
     } catch (error) {
-      console.error('Failed to fetch weather data:', error);
       setMessage('Weather data fetch failed.');
+    }
+  };
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      setMessage('');
     }
   };
 
@@ -248,10 +259,16 @@ function VibeChecker() {
       </form>
 
       <button className="weather-button" type="button" onClick={handleWeatherClick}>
-      🌤
+        🌤
       </button>
+      {message && (
+        <div className="message-overlay" onClick={handleOverlayClick}>
+          <div className="modal-content">
+            <h2>{message}</h2>
+          </div>
+        </div>
+      )}
 
-      {message && <h2>{message}</h2>}
     </main>
   );
 }

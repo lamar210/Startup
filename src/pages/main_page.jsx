@@ -15,8 +15,8 @@ const MainPage = () => {
             src="https://i.pinimg.com/564x/57/d1/3a/57d13a1a19e2941e1ff00c2be0e84b2f.jpg"
             alt="Website Image"
           />
-          <p>
-            <p>Lamar Salama</p>
+          <div>
+            <div>Lamar Salama</div>
             <a
               href="https://github.com/lamar210/Startup.git"
               target="_blank"
@@ -24,15 +24,15 @@ const MainPage = () => {
             >
               Github
             </a>
-          </p>
+          </div>
         </center>
       </main>
 
       <footer>
         <div>
-          <p>
+          <div>
             <br></br>
-          </p>
+          </div>
         </div>
       </footer>
     </div>

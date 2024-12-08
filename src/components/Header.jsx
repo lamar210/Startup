@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
 function Header() {
-    const [email, setEmail] = useState(null);
-
-    useEffect(() => {
-        const storedEmail = localStorage.getItem('userEmail');
-        setEmail(storedEmail);
-    }, []);
-
-    const logout = () => {
-        localStorage.removeItem('userEmail');
-        setEmail(null);
-        navigate('/login');
-    };
+    const { email, logout } = useAuth() || {};
 
     return (
         <>
@@ -26,7 +16,10 @@ function Header() {
             <nav>
                 <div className="username">
                     {email ? (
-                        <Link to="/user_profile">{email}</Link>
+                        <>
+                            <Link to="/user_profile">{email}</Link>
+                            {/* <button onClick={logout}>Logout</button> */}
+                        </>
                     ) : (
                         <Link to="/login">Login</Link>
                     )}
