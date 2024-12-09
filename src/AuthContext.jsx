@@ -14,14 +14,14 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    const login = (email) => {
-        localStorage.setItem('userEmail', email);
-        setEmail(email);
+    const login = (userEmail) => {
+        localStorage.setItem('userEmail', userEmail);
+        setEmail(userEmail);
     };
 
     const logout = () => {
-        localStorage.removeItem('userEmail');
         setEmail(null);
+        localStorage.removeItem('userEmail');
     };
 
     return (

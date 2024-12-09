@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 
 function Header() {
-    const { email, logout } = useAuth() || {};
+    const { email } = useAuth();
 
     return (
         <>
@@ -16,10 +16,7 @@ function Header() {
             <nav>
                 <div className="username">
                     {email ? (
-                        <>
-                            <Link to="/user_profile">{email}</Link>
-                            {/* <button onClick={logout}>Logout</button> */}
-                        </>
+                        <Link to="/user_profile">{email}</Link>
                     ) : (
                         <Link to="/login">Login</Link>
                     )}

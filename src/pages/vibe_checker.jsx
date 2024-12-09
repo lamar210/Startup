@@ -54,6 +54,7 @@ function VibeChecker() {
     }
 
     const formData = {
+      email,
       mood: moodValue,
       shareFeelings: shareFeelingsValue,
       energy: energyValue,
@@ -67,20 +68,20 @@ function VibeChecker() {
     };
 
     try {
-      const response = await fetch('/api/survey', {
+      const response = await fetch('/api/save-scores', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        setMessage('Thank you for your submission!');
+        setMessage(data.message || 'Thank you for your submission!');
       } else {
-        setMessage('There was an issue with your submission. Please try again.');
+        setMessage(data.error || 'There was an issue with your submission. Please try again.');
       }
     } catch (err) {
       setMessage('There was an issue with your submission. Please try again.');

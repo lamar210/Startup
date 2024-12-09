@@ -26,7 +26,8 @@ const CreateAccount = () => {
       if (response.ok) {
         setMessage('Account created successfully!');
       } else {
-        setMessage('There was an error creating your account.');
+        const errorData = await response.json();
+        setMessage(errorData.message || 'Make sure all password requirements are met!');
       }
     } catch (error) {
       setMessage('Network error, please try again later.');
@@ -41,7 +42,7 @@ const CreateAccount = () => {
           <form onSubmit={handleSubmit}>
             <p>Please enter a valid email:</p>
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="Email address"
               value={email}
