@@ -102,4 +102,12 @@ For this deliverable, I worked on implementing backend services to handle data p
 - [x] Node.js/Express HTTP Service: Created endpoints for managing user login and mood data.
 - [x] Static Middleware: Configured middleware to serve frontend files effectively.
 - [x] Backend Service Endpoints: Endpoints for journal entries, login, and survey data are functional.
-- [x] Frontend to Backend Calls: Connected endpoints using Axios for data transfer between React and the backend.
+- [x] Frontend to Backend Calls: Connected endpoints using Axios for data transfer between React and the backend. 
+
+## DB/Login Deliverable
+For this deliverable, I focused on implementing a login system and storing user data securely in the database.
+
+ - [x] MongoDB Atlas Database: Set up the database to store user credentials, journal data, and survey scores.
+ - [x] User Registration: Created a registration system to add new users to the database.
+ - [x] User Login: Implemented login functionality to authenticate users and retrieve their data for multiple features inlcuding reflection of their moods and previous journal entries.
+ - [x] Frontend Restrictions: Restricted journal, survey reflections, and user's profile to logged-in users only.
