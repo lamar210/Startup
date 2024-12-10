@@ -13,6 +13,7 @@ const client = new MongoClient(uri);
 let usersCollection;
 let journal_entriesCollection;
 let survey_scoresCollection;
+let avg_scoresCollection;
 
 async function connectToDB() {
   try {
@@ -21,6 +22,7 @@ async function connectToDB() {
     usersCollection = database.collection('users');
     journal_entriesCollection = database.collection('journal_entries');
     survey_scoresCollection = database.collection('survey_scores');
+    avg_scoresCollection = database.collection('avg_scores');
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('MongoDB connection error:', error);
@@ -148,7 +150,7 @@ apiRouter.get('/current-user', async (req, res) => {
   }
 });
 
-app.post('/api/save-scores', async (req, res) => {
+apiRouter.post('/save-scores', async (req, res) => {
   const { email, scores } = req.body;
   const { happiness, stress, energy } = scores;
 
@@ -177,6 +179,9 @@ app.post('/api/save-scores', async (req, res) => {
       await survey_scoresCollection.insertOne(newScore);
       res.json({ message: 'Thank you for your submission!' });
     }
+
+    await recalculateAverages();
+
   } catch (error) {
     console.error('Error saving or updating scores:', error);
     res.status(500).json({ error: 'An error occurred while saving scores.' });
@@ -199,6 +204,71 @@ apiRouter.get('/get-scores', async (req, res) => {
   } catch (error) {
     console.error('Error retrieving scores:', error);
     res.status(500).json({ error: 'An error occurred while retrieving scores.' });
+  }
+});
+
+async function recalculateAverages() {
+  try {
+    const allScores = await survey_scoresCollection.find({}).toArray();
+
+    if (allScores.length === 0) {
+      return;
+    }
+
+    let totalHappiness = 0, totalStress = 0, totalEnergy = 0;
+
+    allScores.forEach((userScore) => {
+      console.log("User score:", userScore.scores);
+    
+      const happiness = parseFloat(userScore.scores?.happiness);
+      const stress = parseFloat(userScore.scores?.stress);
+      const energy = parseFloat(userScore.scores?.energy);
+    
+      if (!isNaN(happiness)) totalHappiness += happiness;
+      if (!isNaN(stress)) totalStress += stress;
+      if (!isNaN(energy)) totalEnergy += energy;
+    });
+
+    const totalUsers = allScores.length;
+
+    const avgHappiness = totalUsers > 0 ? totalHappiness / totalUsers : 0;
+    const avgStress = totalUsers > 0 ? totalStress / totalUsers : 0;
+    const avgEnergy = totalUsers > 0 ? totalEnergy / totalUsers : 0;
+
+    console.log("Calculated averages:", { avgHappiness, avgStress, avgEnergy });
+
+    await avg_scoresCollection.updateOne(
+      { _id: 'global_avg' },
+      {
+        $set: {
+          happiness: avgHappiness,
+          stress: avgStress,
+          energy: avgEnergy,
+        },
+      },
+      { upsert: true }
+    );
+  } catch (error) {
+    console.error('Error recalculating averages:', error);
+  }
+}
+
+apiRouter.get('/get-avg-scores', async (req, res) => {
+  try {
+    const avgScores = await avg_scoresCollection.findOne({ _id: 'global_avg' });
+
+    if (!avgScores) {
+      return res.status(404).json({ error: 'No average scores available.' });
+    }
+
+    res.json({
+      happiness: avgScores.happiness || 0,
+      stress: avgScores.stress || 0,
+      energy: avgScores.energy || 0,
+    });
+  } catch (error) {
+    console.error('Error fetching average scores:', error);
+    res.status(500).json({ error: 'An error occurred while fetching average scores.' });
   }
 });
 

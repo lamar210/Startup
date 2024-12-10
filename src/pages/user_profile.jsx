@@ -10,6 +10,11 @@ function UserProfile() {
     energy: 0,
   });
   const [moodMessage, setMoodMessage] = useState('');
+  const [othersScores, setOthersScores] = useState({
+    happiness: 0,
+    stress: 0,
+    energy: 0,
+  });
   const { email, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -54,9 +59,29 @@ function UserProfile() {
       }
     };
 
+    const fetchOthersScores = async () => {
+      try {
+        const response = await fetch('/api/get-avg-scores');
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Fetched others mood scores:', data);
+          setOthersScores({
+            happiness: data.happiness || 0,
+            stress: data.stress || 0,
+            energy: data.energy || 0,
+          });
+        } else {
+          setOthersScores({ happiness: 0, stress: 0, energy: 0 });
+        }
+      } catch (error) {
+        console.error('Failed to fetch others scores:', error);
+        setOthersScores({ happiness: 0, stress: 0, energy: 0 });
+      }
+    };
     if (email) {
       fetchMoodScores();
       fetchMoodMessage();
+      fetchOthersScores();
     }
   }, [email]);
 
@@ -68,10 +93,13 @@ function UserProfile() {
   console.log('Mood scores in render:', moodScores);
 
   const data = [
-    { mood: 'Happiness', YourScore: moodScores.happiness, Others: 7 },
-    { mood: 'Stress', YourScore: moodScores.stress, Others: 9 },
-    { mood: 'Energy', YourScore: moodScores.energy, Others: 3 },
+    { mood: 'Happiness', YourScore: moodScores.happiness, Others: parseFloat(othersScores.happiness).toFixed(1) },
+    { mood: 'Stress', YourScore: moodScores.stress, Others: parseFloat(othersScores.stress).toFixed(1) },
+    { mood: 'Energy', YourScore: moodScores.energy, Others: parseFloat(othersScores.happiness).toFixed(1) },
   ];
+
+  console.log('Data for chart:', data);
+
   const chartSettings = {
     keys: ['YourScore', 'Others'],
     indexBy: 'mood',
