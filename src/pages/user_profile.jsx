@@ -16,10 +16,7 @@ function UserProfile() {
   useEffect(() => {
     const fetchMoodScores = async () => {
       try {
-        const response = await fetch('/api/get-scores', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        });
+        const response = await fetch(`/api/get-scores?email=${encodeURIComponent(email)}`);
 
         if (response.ok) {
           const data = await response.json();
@@ -68,22 +65,12 @@ function UserProfile() {
     navigate('/login');
   };
 
+  console.log('Mood scores in render:', moodScores);
+
   const data = [
-    {
-      mood: 'Happiness',
-      YourScore: moodScores.happiness,
-      Others: 75,
-    },
-    {
-      mood: 'Stress',
-      YourScore: moodScores.stress,
-      Others: 60,
-    },
-    {
-      mood: 'Energy',
-      YourScore: moodScores.energy,
-      Others: 80,
-    },
+    { mood: 'Happiness', YourScore: moodScores.happiness, Others: 7 },
+    { mood: 'Stress', YourScore: moodScores.stress, Others: 9 },
+    { mood: 'Energy', YourScore: moodScores.energy, Others: 3 },
   ];
   const chartSettings = {
     keys: ['YourScore', 'Others'],

@@ -78,9 +78,9 @@ const CreateAccount = () => {
         </div>
       </main>
       <footer>
-        <p>
-          If you need assistance, contact support at{' '}
-          <a href="mailto:lms210@byu.edu">lms210@byu.edu</a>.
+        <br></br>
+        <p className='footer-ca'>
+          If you need assistance, contact support at lms210@byu.edu
         </p>
       </footer>
     </div>

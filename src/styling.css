@@ -451,3 +451,11 @@ button[type="submit-login"]{
     color: rgb(203, 97, 97);
   }
   
+.footer-ca{
+    font-family:"Goudy Old Style";
+    color: rgb(203, 97, 97);
+    font-weight: 900;
+    font-size: large;
+    text-shadow: 1px 1px 1px rgba(203, 0, 0, 0.2);
+    padding: 5px;
+}

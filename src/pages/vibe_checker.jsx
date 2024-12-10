@@ -227,7 +227,7 @@ function VibeChecker() {
           <input 
             type="range" 
             min="1" 
-            max="5" 
+            max="10" 
             value={shareFeelingsValue}
             step="0.1" 
             onChange={handleShareFeelingsSlider}

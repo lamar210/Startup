@@ -31,7 +31,7 @@ connectToDB();
 
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:4000' }));
 
 const apiRouter = express.Router();
 app.use('/api', apiRouter);
@@ -102,8 +102,10 @@ apiRouter.post('/evaluate-mood-message', async (req, res) => {
 
     if (stress > happiness) {
       moodMessage = "Your moods have been down lately. Reach out to someone you trust or engage in uplifting activities. It's okay to not be okay.";
-    } else if (happiness >= stress && happiness >= energy) {
+    } else if (happiness >= stress && energy >= stress) {
       moodMessage = "You're doing great! Keep up healthy habits and continue enjoying activities that bring you joy. It is a good day to have a good day.";
+    } else if (stress >= happiness && energy >= stress) {
+      moodMessage = "You're managing okay, but finding balance could help you feel better. Focus on small well-being steps each day.";
     } else {
       moodMessage = "You're managing okay, but finding balance could help you feel better. Focus on small well-being steps each day.";
     }
@@ -151,17 +153,32 @@ app.post('/api/save-scores', async (req, res) => {
   const { happiness, stress, energy } = scores;
 
   try {
-    const newScore = {
-      email,
-      scores: { happiness, stress, energy },
-      date: new Date(),
-    };
+    const existingScores = await survey_scoresCollection.findOne({ email });
 
-    await survey_scoresCollection.insertOne(newScore);
-
-    res.json({ message: 'Thank you for your submission!' });
+    if (existingScores) {
+      await survey_scoresCollection.updateOne(
+        { email },
+        {
+          $set: {
+            'scores.happiness': happiness,
+            'scores.stress': stress,
+            'scores.energy': energy,
+            'date': new Date(),
+          },
+        }
+      );
+      res.json({ message: 'Thank you for your submission!' });
+    } else {
+      const newScore = {
+        email,
+        scores: { happiness, stress, energy },
+        date: new Date(),
+      };
+      await survey_scoresCollection.insertOne(newScore);
+      res.json({ message: 'Thank you for your submission!' });
+    }
   } catch (error) {
-    console.error('Error saving scores:', error);
+    console.error('Error saving or updating scores:', error);
     res.status(500).json({ error: 'An error occurred while saving scores.' });
   }
 });
