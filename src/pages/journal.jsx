@@ -1,14 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Chroma from 'chroma-js';
+import { useAuth } from '../AuthContext';
+import { useLocation } from 'react-router-dom';
 
 const Journal = () => {
-  const [text, setText] = useState('');
+  const location = useLocation();
+  const { entryId, content } = location.state || {};
+  const { email } = useAuth();
+  const [text, setText] = useState(content || '');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState('');
+  const [message, setMessage] = useState('');
   const [color, setColor] = useState("#000000");
   const [font, setFont] = useState("Roboto");
   const menuRef = useRef(null);
   const chromaRef = useRef(null);
+
+  useEffect(() => {
+    if (content) {
+      setText(content);
+    }
+  }, [content]);
 
   const getDate = () => {
     const today = new Date();
@@ -43,13 +55,15 @@ const Journal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const date = getDate();
-    const userEmail = 'user@example.com';
+    if (!email) {
+      setMessage('You need to be logged in to submit the journal entry!');
+      return;
+    }
   
     const newEntry = {
-      email: userEmail,
-      title: `Entry ${journalEntries.length + 1}`,
-      date: date,
+      email,
+      title: `Entry ${Date.now()}`,
+      date: getDate(),
       content: text,
     };
   
@@ -62,37 +76,44 @@ const Journal = () => {
         body: JSON.stringify(newEntry),
       });
   
+      const data = await response.json();
+  
       if (response.ok) {
-        setText('');
+        setMessage('Your journal was saved successfully!');
       } else {
-        console.error('Failed to save journal entry');
+        setMessage(data.error || 'There was an issue saving your journal entry. Please try again.');
       }
     } catch (error) {
       console.error('Error saving journal entry:', error);
+      alert('An unexpected error occurred.');
     }
-};
+  };
 
   const lightenedColor = Chroma(color).brighten(1.5).hex();
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target) &&
-        chromaRef.current &&
-        !chromaRef.current.contains(event.target)
-      ) {
-        setSelectedMenu("");
-        setIsMenuOpen(false);
+    const fetchEntries = async () => {
+      if (email) {
+        try {
+          const response = await fetch(`/api/get-journal-entries?email=${email}`);
+          const data = await response.json();
+          if (response.ok) {
+            setEntries(data);
+            if (data.length > 0) {
+              setText(data[0].content);
+            }
+          } else {
+            console.error('Error fetching journal entries:', data.error);
+          }
+        } catch (error) {
+          console.error('Error fetching journal entries:', error);
+        }
       }
     };
 
-    document.addEventListener("click", handleOutsideClick);
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
-
+    fetchEntries();
+  }, [email]);
+  
   return (
     <div className="journal-page">
       <header>
@@ -157,7 +178,7 @@ const Journal = () => {
                 {[ '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉',
                   '😊', '😎', '😍', '😘', '😜', '🤩', '😝', '😳', '😞',
                   '😟', '😢', '😭', '😤', '😡', '🤬', '😱', '😨', '😰',
-                  '🤯', '🥵', '🥶',
+                  '🤯', '🥵', '🥶', '🐋'
                 ].map((emoji) => (
                   <button
                     type="button"
@@ -205,6 +226,13 @@ const Journal = () => {
             <button type="submit" id="journal-submit">
               Add to my journal
             </button>
+            {message && (
+              <div className="message-overlay" onClick={handleOverlayClick}>
+                <div className="modal-content">
+                  <h2>{message}</h2>
+                </div>
+              </div>
+            )}
           </div>
         </form>
       </main>

@@ -120,14 +120,54 @@ apiRouter.post('/evaluate-mood-message', async (req, res) => {
 });
 
 apiRouter.post('/journal-entries', async (req, res) => {
-  const userEmail = req.body.email;
+  const { email, title, content, date } = req.body;
+  console.log('Email from query:', email);
+
   try {
-    const entries = await journal_entriesCollection.find({ email: userEmail }).toArray();
+    const existingEntry = await journal_entriesCollection.findOne({ email, title, date });
+
+    if (existingEntry) {
+      await journal_entriesCollection.updateOne(
+        { email, title, date },
+        {
+          $set: {
+            content,
+            date: new Date(),
+          },
+        }
+      );
+      res.json({ message: 'Journal entry updated successfully!' });
+    } else {
+      const newEntry = { email, title, content, date };
+      await journal_entriesCollection.insertOne(newEntry);
+      res.json({ message: 'Journal entry saved successfully!' });
+    }
+
+    const entries = await journal_entriesCollection.find({ email }).toArray();
     res.json(entries);
+
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching journal entries', error });
+    console.error('Error saving or updating journal entry:', error);
+    res.status(500).json({ error: 'An error occurred while saving the journal entry.' });
   }
 });
+
+apiRouter.get('/get-journal-entries', async (req, res) => {
+  const { email } = req.query;
+  try {
+    const entries = await journal_entriesCollection.find({ email }).toArray();
+
+    if (entries.length === 0) {
+      return res.status(404).json({ error: 'No journal entries found for this user.' });
+    }
+
+    res.json(entries);
+  } catch (error) {
+    console.error('Error retrieving journal entries:', error);
+    res.status(500).json({ error: 'An error occurred while retrieving journal entries.' });
+  }
+});
+
 
 apiRouter.get('/current-user', async (req, res) => {
   const email = req.headers['authorization']?.split(' ')[1];

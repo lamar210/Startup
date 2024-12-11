@@ -1,30 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
 const JournalEntriesPage = () => {
+  const { email } = useAuth();
   const [journalEntries, setJournalEntries] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchEntries = async () => {
+    const fetchJournalEntries = async () => {
       try {
-        const userEmail = 'user@example.com';
-        const response = await fetch(`/api/journal-entries`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email: userEmail }),
-        });
-        const data = await response.json();
-        setJournalEntries(data);
+        const response = await fetch(`/api/get-journal-entries?email=${encodeURIComponent(email)}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setJournalEntries(data);
+        } else {
+          console.error('Error fetching journal entries:', response.statusText);
+        }
       } catch (error) {
         console.error('Error fetching journal entries:', error);
       }
     };
 
-    fetchEntries();
-  }, []);
+    if (email) {
+      fetchJournalEntries();
+    }
+  }, [email]);
 
+  const handleEntryClick = (entryId) => {
+    const selectedEntry = journalEntries.find(entry => entry._id === entryId);
+    if (selectedEntry) {
+      navigate('/journal', { state: { entryId: selectedEntry._id, content: selectedEntry.content } });
+    }
+  };
+  
   return (
     <div className="journal-entries-page">
       <header>
@@ -32,15 +42,15 @@ const JournalEntriesPage = () => {
       </header>
       <main>
         <div className="entries-list">
-          {journalEntries.map((entry, index) => (
-            <Link
-              key={index}
-              to={`/journal-entry/${index}`}
+          {journalEntries.map((entry) => (
+            <div
+              key={entry._id}
+              onClick={() => handleEntryClick(entry._id)}
               className="journal-entry-box"
             >
               <h3>{entry.title}</h3>
               <p className="entry-date">{entry.date}</p>
-            </Link>
+            </div>
           ))}
         </div>
       </main>
