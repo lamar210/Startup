@@ -136,15 +136,14 @@ apiRouter.post('/journal-entries', async (req, res) => {
           },
         }
       );
-      res.json({ message: 'Journal entry updated successfully!' });
+      const entries = await journal_entriesCollection.find({ email }).toArray();
+      return res.json({ message: 'Journal entry updated successfully!', entries });
     } else {
       const newEntry = { email, title, content, date };
       await journal_entriesCollection.insertOne(newEntry);
-      res.json({ message: 'Journal entry saved successfully!' });
+      const entries = await journal_entriesCollection.find({ email }).toArray();
+      return res.json({ message: 'Journal entry saved successfully!', entries });
     }
-
-    const entries = await journal_entriesCollection.find({ email }).toArray();
-    res.json(entries);
 
   } catch (error) {
     console.error('Error saving or updating journal entry:', error);

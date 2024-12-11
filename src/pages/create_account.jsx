@@ -60,7 +60,7 @@ const CreateAccount = () => {
               required
             />
 
-            <p style={{ fontSize: 'small' }}>Password must include:</p>
+            {/* <p style={{ fontSize: 'small' }}>Password must include:</p> */}
             <button type="submit">Continue</button>
           </form>
           {message && <p>{message}</p>}
@@ -68,14 +68,14 @@ const CreateAccount = () => {
             Already have an account? <Link to="/login">Login here</Link>
           </p>
         </center>
-        <div className="conditions">
+        {/* <div className="conditions">
           <ul style={{ fontSize: 'small' }}>
             <li>At least 8 characters</li>
             <li>At least one lowercase letter</li>
             <li>At least one uppercase letter</li>
             <li>At least one unique character (e.g., @, #, $, %, _ )</li>
           </ul>
-        </div>
+        </div> */}
       </main>
       <footer>
         <br></br>

@@ -39,7 +39,6 @@ const Journal = () => {
 
   const handleColorChange = (event) => {
     setColor(event.target.value);
-    setSelectedMenu('');
   };
 
   const handleFontChange = (newFont) => {
@@ -113,6 +112,10 @@ const Journal = () => {
 
     fetchEntries();
   }, [email]);
+
+  const handleOverlayClick = () => {
+    setMessage('');
+  };
   
   return (
     <div className="journal-page">

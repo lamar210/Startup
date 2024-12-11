@@ -14,7 +14,7 @@ const JournalEntriesPage = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setJournalEntries(data);
+          setJournalEntries(data.reverse());
         } else {
           console.error('Error fetching journal entries:', response.statusText);
         }
@@ -41,21 +41,27 @@ const JournalEntriesPage = () => {
         <h2>My Journal Entries</h2>
       </header>
       <main>
-        <div className="entries-list">
-          {journalEntries.map((entry) => (
-            <div
-              key={entry._id}
-              onClick={() => handleEntryClick(entry._id)}
-              className="journal-entry-box"
-            >
-              <h3>{entry.title}</h3>
-              <p className="entry-date">{entry.date}</p>
-            </div>
-          ))}
-        </div>
+        {journalEntries.length === 0 ? (
+          <div className="footer-ca">
+            <p>Start your journal journey here! <Link to="/journal">Go to Journal</Link></p>
+          </div>
+        ) : (
+          <div className="entries-list">
+            {journalEntries.map((entry, index) => (
+              <div
+                key={entry._id}
+                onClick={() => handleEntryClick(entry._id)}
+                className="journal-entry-box"
+              >
+                <h3>{`Entry ${journalEntries.length - index}`}</h3>
+                <p className="entry-date">{entry.date}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </main>
     </div>
-  );
+  );  
 };
 
 export default JournalEntriesPage;

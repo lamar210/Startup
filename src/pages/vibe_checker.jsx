@@ -88,22 +88,56 @@ function VibeChecker() {
     }
   };
 
-  const handleWeatherClick = async () => {
-    const apiBase = 'https://dragon.best/api/glax_weather.json';
-    const params = {
-      lat: '7.4474',
-      lon: '46.9481',
-      units: 'metric',
-    };
-
-    const queryString = new URLSearchParams(params).toString();
-    const apiUrl = `${apiBase}?${queryString}`;
-
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          console.log('Latitude:', lat); 
+          console.log('Longitude:', lon);
+          handleWeatherClick(lat, lon);
+        },
+        (error) => {
+          console.error('Error fetching location:', error);
+          setMessage('Unable to retrieve your location');
+        }
+      );
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+      setMessage('Geolocation is not supported by your browser.');
+    }
+  };
+  
+  const handleWeatherClick = async (lat, lon) => {
+    const apiKey = '66d58455c018da1d26792a5cff863c85';
+    if (typeof lat !== 'number' || typeof lon !== 'number') {
+      console.error('Invalid latitude or longitude');
+      setMessage('Invalid location data');
+      return;
+    }
+  
+    console.log(`Fetching weather data for lat: ${lat}, lon: ${lon}`);
+  
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-      setMessage(`Weather: ${data.weather || 'N/A'}`);
+  
+      if (response.ok) {
+        console.log(data);
+        if (data.weather && data.weather.length > 0) {
+          setMessage(`Weather in ${data.name}: ${data.weather[0].description || 'N/A'}, Temperature: ${data.main.temp}°C`);
+        } else {
+          setMessage('Weather data not available.');
+        }
+      } else {
+        console.log(data);
+        setMessage(data.message || 'Weather data fetch failed.');
+      }
     } catch (error) {
+      console.error('Weather fetch error:', error);
       setMessage('Weather data fetch failed.');
     }
   };
@@ -259,7 +293,7 @@ function VibeChecker() {
         <button type="submit">Submit</button>
       </form>
 
-      <button className="weather-button" type="button" onClick={handleWeatherClick}>
+      <button className="weather-button" type="button" onClick={getUserLocation}>
         🌤
       </button>
       {message && (
