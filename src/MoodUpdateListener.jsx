@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 const MoodUpdateListener = () => {
   const [notification, setNotification] = useState('');
-
+  const [wsError, setWsError] = useState('');
 
   useEffect(() => {
     const ws = new WebSocket('ws://localhost:4000');
+
+    ws.onopen = () => {
+      console.log('WebSocket connection established.');
+      setWsError('');
+    };
 
     ws.onmessage = (event) => {
       const data = event.data;
@@ -23,6 +28,16 @@ const MoodUpdateListener = () => {
       }
     };
 
+    ws.onerror = (error) => {
+      setWsError('Failed to connect to the WebSocket server.');
+      console.error('WebSocket error:', error);
+    };
+
+    ws.onclose = () => {
+      console.log('WebSocket connection closed.');
+      setWsError('WebSocket connection closed.');
+    };
+
     return () => {
       ws.close();
     };
@@ -33,10 +48,11 @@ const MoodUpdateListener = () => {
       setNotification('');
     }
   };
-  
+
   return (
     <div>
-    {notification && (
+      {wsError && <div className="error-message">{wsError}</div>}
+      {notification && (
         <div className="message-overlay" onClick={handleOverlayClick}>
           <div className="modal-content">
             <h2>{notification}</h2>

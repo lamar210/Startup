@@ -319,9 +319,9 @@ apiRouter.post('/logout', (req, res) => {
   res.json({ message: 'Logged out successfully' });
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server running on http://localhost:${port}`);
+// });
 
 
 const server = http.createServer(app);
@@ -346,6 +346,6 @@ wss.on('connection', (ws) => {
   });
 });
 
-// server.listen(port, () => {
-//   console.log(`Server is listening on port ${port}`);
-// });
+server.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
