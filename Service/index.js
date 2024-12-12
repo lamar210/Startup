@@ -4,6 +4,9 @@ const axios = require('axios');
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const WebSocket = require('ws');
+const http = require('http');
+
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -319,3 +322,30 @@ apiRouter.post('/logout', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+
+wss.on('connection', (ws) => {
+  console.log('New WebSocket connection');
+  
+  ws.on('message', (message) => {
+    console.log('Received message:', message);
+    
+    wss.clients.forEach(client => {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(message);
+      }
+    });
+  });
+
+  ws.on('close', () => {
+    console.log('WebSocket connection closed');
+  });
+});
+
+// server.listen(port, () => {
+//   console.log(`Server is listening on port ${port}`);
+// });

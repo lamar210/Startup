@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import Button from 'react-bootstrap/Button';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -61,7 +62,7 @@ const LoginPage = () => {
                             <button type="submit">Login</button>
                         </div>
                     </form>
-                    <p>Don't have an account? <a href="/create_account">Create an account</a></p>
+                    <Button variant='primary' onClick={() => navigate('/create_account')}> Create account </Button>
                 </center>
             </main>
         </div>

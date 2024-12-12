@@ -12,12 +12,19 @@ wss.on('connection', (ws) => {
   ws.on('message', (message) => {
     console.log('Received message:', message);
 
-    const notification = "Others have shared their moods and is now reflected in the charts! Go check it out";
-    connections.forEach((client) => {
-      if (client.id !== connection.id && client.ws.readyState === WebSocket.OPEN) {
-        client.ws.send(notification);
-      }
-    });
+    const data = JSON.parse(message);
+
+    if (data.type === 'moodUpdated') {
+      console.log('Mood update received!');
+
+      const notification = "Others have shared their moods and is now reflected in the charts! Go check it out.";
+      connections.forEach((client) => {
+        if (client.id !== connection.id && client.ws.readyState === WebSocket.OPEN) {
+          client.ws.send(notification);
+        }
+      });
+    } else {
+    }
   });
 
   ws.on('close', () => {

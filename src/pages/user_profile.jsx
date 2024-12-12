@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import Button from 'react-bootstrap/Button';
 
 function UserProfile() {
   const [moodScores, setMoodScores] = useState({
@@ -168,7 +169,7 @@ function UserProfile() {
 
         <h3>Your Previous Journal Entries</h3>
         <div>
-          <a href="/journal_entries">Journal entries</a>
+        <Button variant='primary' onClick={() => navigate('/journal_entries')}> Journal entries </Button>
         </div>
         <button className="logout-button" onClick={handleLogout}>Logout</button>
       </main>

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useAuth } from '../AuthContext';
+import { useNotification } from '../notification';
 
 function VibeChecker() {
   const { email } = useAuth();
@@ -11,6 +12,8 @@ function VibeChecker() {
   const [shareFeelingsValue, setShareFeelingsValue] = useState(3);
   const [energyValue, setEnergyValue] = useState(5);
   const [message, setMessage] = useState('');
+  const { showNotification } = useNotification();
+  const [notifications, setNotifications] = useState([])
 
   const handleOtherTrigger = (event) => {
     IsOtherOpt(event.target.checked);
@@ -80,6 +83,34 @@ function VibeChecker() {
   
       if (response.ok) {
         setMessage(data.message || 'Thank you for your submission!');
+        showNotification('Survey entry saved!');
+        const ws = new WebSocket('ws://localhost:4000');
+
+        ws.onopen = () => {
+          console.log('WebSocket connection opened');
+          ws.send(JSON.stringify('Other users have submitted the survey! Charts are updated!' ));
+        };
+        
+        ws.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            if (data.type === 'notification') {
+              console.log('Received notification:', data.message);
+              showNotification(data.message);
+            }
+          } catch (error) {
+            console.error('Error parsing WebSocket message:', error);
+          }
+        };
+        
+        ws.onerror = (error) => {
+          console.error('WebSocket error:', error);
+        };
+        
+        ws.onclose = () => {
+          console.log('WebSocket connection closed');
+        };
+        
       } else {
         setMessage(data.error || 'There was an issue with your submission. Please try again.');
       }
@@ -267,9 +298,9 @@ function VibeChecker() {
             onChange={handleShareFeelingsSlider}
           />
           <div className="slider-labels">
-            <span>Not likely</span>
-            <span>Maybe (depends on the person)</span>
             <span>Very likely</span>
+            <span>Maybe (depends on the person)</span>
+            <span>Not likely</span>
           </div>
         </div>
 
@@ -302,6 +333,10 @@ function VibeChecker() {
             <h2>{message}</h2>
           </div>
         </div>
+      )}
+
+      {notifications.length > 0 && (
+        <Notification message={notifications[0]} />
       )}
 
     </main>
