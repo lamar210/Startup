@@ -111,3 +111,10 @@ For this deliverable, I focused on implementing a login system and storing user 
  - [x] User Registration: Created a registration system to add new users to the database.
  - [x] User Login: Implemented login functionality to authenticate users and retrieve their data for multiple features inlcuding reflection of their moods and previous journal entries.
  - [x] Frontend Restrictions: Restricted journal, survey reflections, and user's profile to logged-in users only.
+## WebSocket Deliverable
+The following outlines the WebSocket implementation for real-time journal updates on my website:
+
+- [x] Backend listens for WebSocket connection: The server accepts WebSocket connections and handles incoming messages for journal updates.
+- [x] Frontend establishes WebSocket connection: The client successfully connects to the WebSocket server when a user logs in.
+- [x] Data sent over WebSocket connection: Journal entry updates, including text and style changes (like color), are sent through the WebSocket connection.
+- [x] WebSocket data displayed: Real-time updates to journal entries are visible immediately across connected clients.
