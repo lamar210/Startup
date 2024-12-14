@@ -84,7 +84,10 @@ function VibeChecker() {
       if (response.ok) {
         setMessage(data.message || 'Thank you for your submission!');
         showNotification('Survey entry saved!');
-        const ws = new WebSocket('ws://localhost:4000');
+        let port = window.location.port;
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        const ws = new WebSocket(`${protocol}://${window.location.hostname}:${port}`);
+        // const ws = new WebSocket('ws://localhost:4000');
 
         ws.onopen = () => {
           console.log('WebSocket connection opened');

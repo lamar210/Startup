@@ -5,8 +5,9 @@ const MoodUpdateListener = () => {
   const [wsError, setWsError] = useState('');
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:4000');
-
+    let port = window.location.port;
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const ws = new WebSocket(`${protocol}://${window.location.hostname}:${port}`);
     ws.onopen = () => {
       console.log('WebSocket connection established.');
       setWsError('');
